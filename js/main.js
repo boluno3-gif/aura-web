@@ -1,5 +1,5 @@
 /* =========================================================
-   Los 3Deseos · lógica de la web
+   AURA Design · lógica de la web
    Para cambiar precios, oferta o lámparas, edita CONFIG y LAMPARAS.
    ========================================================= */
 

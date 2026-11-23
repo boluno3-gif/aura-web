@@ -1,4 +1,4 @@
-# Terracota lights · por Los 3Deseos
+# AURA Design
 
 Web de lámparas de mesa impresas en 3D en Málaga.
 

@@ -1,5 +1,5 @@
 /* =========================================================
-   Los 3Deseos · estilos
+   AURA Design · estilos
    Paleta y tipografías tomadas de la marca actual.
    ========================================================= */
 :root {
@@ -135,9 +135,15 @@ h1 em, h2 em, h3 em {
 .logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-family: var(--display); font-weight: 700; font-size: 21px; letter-spacing: -.03em; }
 .logo img { border-radius: 9px; }
 .logo-texto { display: flex; flex-direction: column; line-height: 1; }
-.logo-nombre { white-space: nowrap; letter-spacing: 0; }
-.logo-nombre b { font-family: var(--logo); font-weight: 400; font-size: 27px; letter-spacing: -.02em; }
-.logo-nombre i { font-family: var(--logo-cursiva); font-style: italic; font-weight: 400; font-size: 26px; margin-left: 1px; }
+.logo-nombre { display: inline-flex; flex-direction: column; white-space: nowrap; letter-spacing: 0; }
+.logo-nombre b { font-family: var(--display); font-weight: 400; font-size: 24px; letter-spacing: .16em; margin-right: -.16em; }
+/* "design" debajo de AURA: mayúsculas pequeñas, separadas, con una línea a la izquierda */
+.logo-nombre i {
+  display: flex; align-items: center; gap: 8px; margin-top: 5px; margin-right: -.34em;
+  font-family: var(--display); font-style: normal; font-weight: 400; font-size: 10px;
+  letter-spacing: .34em; text-transform: uppercase;
+}
+.logo-nombre i::before { content: ""; flex: 1; height: 1px; background: currentColor; }
 .logo-texto small {
   font-family: var(--texto); font-size: 10.5px; font-weight: 500;
   letter-spacing: .14em; text-transform: none; opacity: .75; margin-top: 4px;
@@ -162,7 +168,20 @@ h1 em, h2 em, h3 em {
   position: relative; min-height: 100svh; display: flex; align-items: flex-end;
   color: var(--crema); overflow: hidden; background: var(--noche);
 }
-.hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+/* Portada: se ve la foto entera, pegada abajo a la derecha. El fondo imita
+   los colores de la foto (negro arriba, suelo terracota abajo) para que no se noten bordes. */
+.hero:has(.hero-video) { background: linear-gradient(180deg, #0e0809 0%, #1c0f0e 40%, #4a221c 62%, #9a4c37 82%, #b55c43 100%); }
+.hero-video {
+  position: absolute; right: 0; bottom: 0; width: 80%; height: auto; max-height: 100%; object-fit: contain;
+  /* Bordes izquierdo y superior difuminados para fundirse con el fondo */
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 22%), linear-gradient(to bottom, transparent 0%, #000 18%);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(to right, transparent 0%, #000 22%), linear-gradient(to bottom, transparent 0%, #000 18%);
+  mask-composite: intersect;
+}
+@media (max-width: 760px) {
+  .hero-video { inset: 0; width: 100%; height: 100%; max-height: none; object-fit: cover; object-position: 72% center; -webkit-mask-image: none; mask-image: none; }
+}
 .hero-velo { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(26,18,12,.45) 0%, rgba(26,18,12,.15) 35%, rgba(26,18,12,.75) 100%); }
 .hero-contenido { position: relative; width: 100%; padding-bottom: clamp(90px, 14vh, 150px); padding-top: 140px; }
 .hero h1 { max-width: 10em; }
