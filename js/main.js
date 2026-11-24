@@ -16,32 +16,32 @@ const CONFIG = {
 
 // fotos: n.º de fotos en assets/fotos/<carpeta>/ — la 1 es encendida y la 2 apagada
 const LAMPARAS = [
-  { id: "aurora", nombre: "Aurora", precio: 49.9, medidas: "17 × 18,8 × 17 cm", etsy: "4622716539", carpeta: "aurora", fotos: 12,
+  { id: "aurora", nombre: "Aurora", precio: 49.9, medidas: "17 × 18,8 × 17 cm", etsy: "4622716539", carpeta: "aurora", fotos: 5,
     lema: t("La luz atraviesa las ondas y crea un brillo suave, como una aurora.",
             "Light passes through the waves and creates a soft glow, like an aurora."),
     descripcion: t("Una lámpara de mesa de formas orgánicas, recorrida por finas estrías que se ondulan de arriba abajo. Apagada parece una escultura, y encendida la luz atraviesa las ondas y crea un brillo suave y envolvente. Más grande que nuestras minis: queda bien en el salón, una consola o la mesita de noche.",
                    "A table lamp with organic forms, traced by fine ridges that ripple from top to bottom. Switched off it looks like a sculpture; switched on, the light passes through the waves and creates a soft, enveloping glow. One of our larger pieces, it looks great in the living room, on a console table or on a bedside table.") },
-  { id: "lamas", nombre: "Lamas", precio: 44.9, medidas: "11 × 22 × 11 cm", etsy: "4618371309", carpeta: "lamas", fotos: 19,
+  { id: "lamas", nombre: "Lamas", precio: 44.9, medidas: "11 × 22 × 11 cm", etsy: "4618371309", carpeta: "lamas", fotos: 6,
     lema: t("La luz se cuela entre las lamas y dibuja sombras suaves.",
             "Light slips between the slats and casts soft shadows."),
     descripcion: t("Una lámpara de mesa de lamas onduladas sobre una base acanalada. Apagada parece una escultura, y encendida la luz se cuela entre las lamas y dibuja sombras suaves. Queda bien en la mesita de noche, una estantería o el salón.",
                    "A table lamp with wavy slats on a fluted base. Switched off it looks like a sculpture; switched on, the light slips between the slats and casts soft shadows. Perfect for a bedside table, a shelf or the living room.") },
-  { id: "ola-doble", nombre: "Ola", precio: 44.9, medidas: "11 × 22 × 11 cm", etsy: "4622715284", carpeta: "ola-doble", fotos: 14,
+  { id: "ola-doble", nombre: "Ola", precio: 44.9, medidas: "11 × 22 × 11 cm", etsy: "4622715284", carpeta: "ola-doble", fotos: 6,
     lema: t("Decenas de lamas que se ondulan en doble ola de arriba abajo.",
             "Dozens of slats rippling in a double wave from top to bottom."),
     descripcion: t("Una lámpara de mesa en forma de columna, con decenas de lamas blancas que se ondulan en doble ola y cambian de aspecto desde cada ángulo. Apagada parece una escultura, y encendida la luz se filtra entre las lamas y dibuja una trama cálida y suave. Alta y esbelta, queda bien en el salón, una consola, el escritorio o la mesita de noche.",
                    "A column-shaped table lamp with dozens of white slats that ripple in a double wave and change appearance from every angle. Switched off it looks like a sculpture; switched on, the light filters between the slats and draws a warm, soft pattern. Tall and slender, it looks great in the living room, on a console table, a desk or a bedside table.") },
-  { id: "seda", nombre: "Seda", precio: 39.9, medidas: "15 × 22 × 15 cm", etsy: "4622739074", carpeta: "seda", fotos: 12,
+  { id: "seda", nombre: "Seda", precio: 39.9, medidas: "15 × 22 × 15 cm", etsy: "4622739074", carpeta: "seda", fotos: 6,
     lema: t("Una silueta suave que se retuerce, con estrías finas como la seda.",
             "A soft, twisting silhouette with fine ridges like silk."),
     descripcion: t("Una lámpara de mesa de líneas suaves que gira sobre sí misma, con un acabado de estrías finas que recuerda a la seda, sobre una base redonda en tono madera. Apagada luce como una pieza de decoración, y encendida reparte una luz uniforme y cálida. Queda bien en el salón, el escritorio, una estantería o la mesita de noche.",
                    "A softly curved table lamp that twists around itself, with a finish of fine ridges reminiscent of silk, on a round wood-tone base. Switched off it's a decorative piece; switched on, it gives an even, warm light. Perfect for the living room, a desk, a shelf or a bedside table.") },
-  { id: "opalo-mini", nombre: "Ópalo", precio: 34.9, medidas: "13,5 × 21 × 13,5 cm", etsy: "4616261694", carpeta: "opalo", fotos: 15,
+  { id: "opalo-mini", nombre: "Ópalo", precio: 34.9, medidas: "13,5 × 21 × 13,5 cm", etsy: "4616261694", carpeta: "opalo", fotos: 6,
     lema: t("Brilla entera, como una piedra de ópalo con luz dentro.",
             "It glows all over, like an opal stone with light inside."),
     descripcion: t("Una lámpara de mesa con forma ondulada y retorcida. Apagada luce como una pieza de decoración, y encendida brilla entera con una luz cálida y suave. Queda bien en la mesita de noche, una estantería o el salón.",
                    "A table lamp with a wavy, twisted shape. Switched off it's a decorative piece; switched on, it glows all over with a warm, soft light. Perfect for a bedside table, a shelf or the living room.") },
-  { id: "marea-mini", nombre: "Marea", precio: 34.9, medidas: "13,2 × 19,6 × 13,2 cm", etsy: "4615974607", carpeta: "marea", fotos: 13,
+  { id: "marea-mini", nombre: "Marea", precio: 34.9, medidas: "13,2 × 19,6 × 13,2 cm", etsy: "4615974607", carpeta: "marea", fotos: 6,
     lema: t("Una espiral trenzada que se levanta capa a capa.",
             "A braided spiral rising layer by layer."),
     descripcion: t("Una lámpara de mesa con forma de espiral trenzada. Apagada luce como una pieza de decoración, y encendida la trama reparte una luz cálida y suave. Queda bien en la mesita de noche, una estantería o el salón.",
@@ -213,6 +213,8 @@ function abrirFicha(id) {
   if (!l) return;
   const ficha = $("#ficha");
   const principal = $("#ficha-foto");
+  // si la foto no es vertical, se muestra entera en vez de recortada
+  principal.onload = () => principal.classList.toggle("entera", principal.naturalWidth / principal.naturalHeight > 0.9);
   const ponerFoto = (n) => {
     principal.src = foto(l, n);
     principal.alt = t(`Lámpara ${l.nombre}, foto ${n}`, `${l.nombre} lamp, photo ${n}`);
