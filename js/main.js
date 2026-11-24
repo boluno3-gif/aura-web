@@ -113,13 +113,10 @@ function pintarDestacadas() {
       <img src="assets/fotos/abanico/${ESTUDIO[l.id]}.jpg" alt="Lámpara ${l.nombre} encendida" loading="lazy" />
       <span class="hoja-nombre-corto" aria-hidden="true">${l.nombre}</span>
       <div class="hoja-texto">
-        <p class="hoja-ante">Hecha por encargo · ${l.medidas}</p>
         <h3>${l.nombre}</h3>
-        <p class="hoja-lema">${l.lema}</p>
         <div class="hoja-pie">
           <span class="precio">${precioHTML(l)}</span>
-          <button data-abrir="${l.id}">Descubrir</button>
-          <a class="enlace-flecha enlace-claro" href="${enlaceEtsy(l)}" target="_blank" rel="noopener">Comprar <span aria-hidden="true">→</span></a>
+          <button data-abrir="${l.id}">Descúbrela</button>
         </div>
       </div>
     </article>`).join("");

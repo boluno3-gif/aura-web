@@ -411,15 +411,27 @@ h1 em, h2 em, h3 em {
 .tonos-foto[data-tono="fria"] [data-capa="fria"] { opacity: 1; }
 
 /* Taller */
-.taller { display: grid; grid-template-columns: 1fr 1fr; gap: 6vw; }
+.taller { display: grid; grid-template-columns: 1fr 1fr; column-gap: 6vw; row-gap: 0; align-items: start; }
+/* "El taller" va solo arriba; el título y el texto empiezan a la misma altura */
+.taller-ante { grid-column: 1 / -1; margin-bottom: 26px; }
+.taller h2 { margin-top: -.12em; }
 .taller-texto { display: flex; flex-direction: column; gap: 20px; color: var(--apagado); font-size: 18px; }
-.taller-ctas { display: flex; flex-wrap: wrap; gap: 14px 28px; margin-top: 12px; color: var(--oscuro); }
+.taller-texto p { text-align: justify; hyphens: auto; }
+.taller-ctas { display: flex; flex-wrap: wrap; gap: 14px 56px; margin-top: 12px; color: var(--oscuro); }
 .pasos { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; counter-reset: paso; }
 .pasos li { background: var(--papel); border-radius: var(--radio); padding: 28px; display: flex; flex-direction: column; gap: 14px; min-height: 260px; transition: transform .4s var(--ease), box-shadow .4s; }
 .pasos li:hover { transform: translateY(-6px); box-shadow: var(--sombra); }
 .pasos li h3 { margin-top: 40px; }
+.pasos .numero { font-size: 26px; }
 .pasos li p { color: var(--apagado); font-size: 15px; }
 .pasos strong { color: var(--terracota); }
+/* Frase grande y centrada bajo los pasos */
+@media (min-width: 1000px) { .manifiesto-texto { white-space: nowrap; } }
+.manifiesto { text-align: center; max-width: 1200px; margin: clamp(24px, 4vw, 56px) auto 0; }
+.manifiesto-texto {
+  font-family: var(--display); font-size: clamp(22px, 2.4vw, 32px); line-height: 1.3;
+  letter-spacing: -.01em; color: var(--oscuro); text-wrap: balance;
+}
 
 /* Abanico de las seis lámparas */
 /* Abanico: seis franjas a todo el ancho; la activa se ensancha y muestra nombre y explicación */
@@ -485,10 +497,23 @@ h1 em, h2 em, h3 em {
 .acordeon details[open] summary::after { transform: rotate(45deg); }
 .acordeon .respuesta { padding: 0 42px 28px 72px; color: var(--apagado); max-width: 52em; }
 
+/* Preguntas sobre fondo oscuro, igual que el cierre y el pie */
+.preguntas-fondo {
+  background: #000; color: var(--crema);
+  margin: clamp(10px, 1vw, 16px); border-radius: 28px;   /* recuadro como el de la colección */
+}
+.preguntas-fondo h2 em { color: var(--ambar); }
+.preguntas-fondo .antetitulo { color: var(--ambar); }
+.preguntas-fondo .seccion-titulo > p { color: #CFC4B6; }
+.preguntas-fondo .seccion-titulo a { color: var(--crema); }
+.preguntas-fondo .acordeon, .preguntas-fondo .acordeon details { border-color: #2a2a2a; }
+.preguntas-fondo .acordeon .numero { color: var(--ambar); }
+.preguntas-fondo .acordeon .respuesta { color: #CFC4B6; }
+
 /* Cierre */
 .cierre {
   position: relative; color: var(--crema); text-align: center; overflow: hidden;
-  background: radial-gradient(ellipse 60% 70% at 50% 110%, rgba(226,180,138,.35), transparent 70%), var(--noche);
+  background: radial-gradient(ellipse 60% 70% at 50% 110%, rgba(226,180,138,.35), transparent 70%), #000;
   padding-block: clamp(100px, 16vw, 200px);
 }
 .cierre-contenido { display: flex; flex-direction: column; align-items: center; gap: 22px; }
@@ -499,7 +524,7 @@ h1 em, h2 em, h3 em {
 .confianza li + li::before { content: "·"; margin: 0 14px; color: #5a4a3e; }
 
 /* Pie */
-.pie-pagina { background: var(--noche); color: #CFC4B6; border-top: 1px solid #33271e; font-size: 15px; }
+.pie-pagina { background: #000; color: #CFC4B6; border-top: 1px solid #222; font-size: 15px; }
 .pie-rejilla { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 40px; padding-block: 64px; }
 .pie-marca .logo { color: var(--crema); margin-bottom: 18px; }
 .pie-rejilla h4 { font-family: var(--texto); font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--dorado); margin-bottom: 18px; font-weight: 700; }
@@ -571,6 +596,8 @@ h1 em, h2 em, h3 em {
   .panel { grid-template-columns: 1fr; }
   .panel img { aspect-ratio: 4 / 3; height: auto; }
   .tonos-fila, .taller { grid-template-columns: 1fr; }
+  .taller { row-gap: 24px; }
+  .taller-ante { margin-bottom: -6px; }
   .ficha[open] { grid-template-columns: minmax(0, 1fr); }
   .ficha-galeria > img { max-height: 60dvh; }
 }
