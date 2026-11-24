@@ -13,6 +13,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=DM+Serif+Display&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/styles.css" />
+  <script>
+    // Móviles: se abre la versión de móvil (movil.html). Con ?ordenador se ve la de ordenador.
+    if (matchMedia("(max-width: 760px)").matches && !/[?&]ordenador/.test(location.search))
+      location.replace("movil.html" + location.search + location.hash);
+  </script>
 </head>
 <body>
 

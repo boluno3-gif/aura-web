@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="es" data-version="movil">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>AURA Design · Lámparas impresas en 3D en Málaga</title>
+  <meta name="description" content="Lámparas de mesa de diseño impresas en 3D por encargo en Málaga. Luz LED regulable en tres tonos: cálida, neutra o fría. Envío gratis en España." />
+  <meta property="og:title" content="AURA Design · Lámparas impresas en 3D en Málaga" />
+  <meta property="og:description" content="Lámparas escultóricas impresas en 3D, hechas por encargo en Málaga." />
+  <meta property="og:image" content="assets/fotos/lamas/1.jpg" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=DM+Serif+Display&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/movil.css" />
+</head>
+<body>
+
+  <!-- Cabecera -->
+  <header class="cabecera" id="cabecera">
+    <div class="ancho cabecera-fila">
+      <a href="#inicio" class="logo" aria-label="AURA Design. Inicio">
+        <span class="logo-texto"><span class="logo-nombre"><b>AURA</b> <i>design</i></span></span>
+      </a>
+      <nav class="menu" id="menu" aria-label="Principal">
+        <a href="#coleccion">Colección</a>
+        <a href="#historia">Nosotros</a>
+        <a href="#taller">El taller</a>
+        <a href="#preguntas">Preguntas</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      <div class="cabecera-acciones">
+        <div class="idiomas" role="group" aria-label="Idioma / Language">
+          <button type="button" data-idioma="es" lang="es" aria-label="Español">ES</button>
+          <span aria-hidden="true">/</span>
+          <button type="button" data-idioma="en" lang="en" aria-label="English">EN</button>
+        </div>
+        <a class="icono" href="https://www.instagram.com/los3deseos_/" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a class="boton boton-pequeno" href="https://www.etsy.com/shop/Los3Deseos" target="_blank" rel="noopener">Tienda en Etsy</a>
+        <button class="hamburguesa" id="hamburguesa" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu">
+          <span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero" id="inicio">
+      <img class="hero-video" src="assets/fotos/portada.jpg" alt="Una mano se acerca a una lámpara escultórica encendida" fetchpriority="high" />
+      <div class="hero-velo"></div>
+      <div class="ancho hero-contenido">
+        <p class="antetitulo antetitulo-claro aparece">Hechas a mano en Málaga</p>
+        <h1 class="aparece">Luz con forma<br />para cada <em>rincón</em></h1>
+        <p class="hero-sub aparece">Lámparas de mesa fabricadas por encargo. Una a una, capa a capa<br />Con luz LED regulable en tres tonos</p>
+        <div class="hero-ctas aparece">
+          <a class="boton boton-claro" href="#coleccion">Ver la colección <span aria-hidden="true">→</span></a>
+          <a class="enlace-flecha enlace-claro" href="#taller">mira cómo nace cada lámpara <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Vitrina: las lámparas se encienden una a una al bajar -->
+    <section class="vitrina" id="vitrina" aria-label="Lámparas destacadas">
+      <div class="vitrina-panel">
+        <div class="vitrina-cabeza">
+          <p>Destacadas</p>
+          <a href="#coleccion">Ver todas <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="vitrina-fila" id="vitrina-fila"></div>
+      </div>
+    </section>
+
+    <!-- De día a noche: escena que se enciende con el scroll -->
+    <section class="anochecer" id="anochecer">
+      <div class="anochecer-fijo">
+        <div class="anochecer-fondo" aria-hidden="true">
+          <img src="assets/fotos/anochecer/dia.jpg" alt="" />
+          <img class="encendida" src="assets/fotos/anochecer/noche.jpg" alt="" />
+        </div>
+        <div class="anochecer-texto">
+          <p class="antetitulo antetitulo-claro">De día a noche</p>
+          <h2>
+            <span class="frase frase-dia">Cuando cae la tarde…</span>
+            <span class="frase frase-noche">…tu casa se <em>ilumina</em></span>
+          </h2>
+          <a class="enlace-flecha anochecer-enlace" href="#coleccion">Explora la colección <span aria-hidden="true">→</span></a>
+        </div>
+        <p class="anochecer-estado" role="img" aria-label="Lámpara Aurora sobre un mueble de madera, de día apagada y de noche encendida"><span id="anochecer-estado">apagada</span> · Aurora</p>
+      </div>
+    </section>
+
+    <!-- Colección -->
+    <div class="coleccion-fondo">
+    <section class="ancho seccion" id="coleccion">
+      <div class="seccion-titulo aparece">
+        <div>
+          <p class="antetitulo">La colección</p>
+          <h2>Seis esculturas que dan <em>luz</em></h2>
+          <p class="seccion-sub">Apagadas son esculturas.<br />Encendidas, la luz se cuela entre las capas y dibuja sombras suaves por toda la habitación.</p>
+        </div>
+      </div>
+      <div class="rejilla" id="rejilla"></div>
+    </section>
+    </div>
+
+    <!-- Nuestra historia -->
+    <section class="ancho seccion" id="historia">
+      <div class="seccion-titulo aparece">
+        <div>
+          <p class="antetitulo">Nuestra historia</p>
+          <h2>Así nace un <em>aura</em></h2>
+        </div>
+      </div>
+
+      <div class="pestanas aparece" role="tablist" aria-label="Nuestra historia">
+        <button role="tab" aria-selected="true" aria-controls="p-idea" id="t-idea">La idea</button>
+        <button role="tab" aria-selected="false" aria-controls="p-impresion" id="t-impresion" tabindex="-1">La impresión</button>
+        <button role="tab" aria-selected="false" aria-controls="p-encargo" id="t-encargo" tabindex="-1">Por encargo</button>
+        <button role="tab" aria-selected="false" aria-controls="p-material" id="t-material" tabindex="-1">La luz</button>
+      </div>
+
+      <div class="historia aparece">
+        <div class="historia-paneles">
+          <article class="panel" role="tabpanel" id="p-idea" aria-labelledby="t-idea">
+            <img src="assets/fotos/lamas/1.jpg" alt="Lámpara Lamas apagada" loading="lazy" />
+            <div class="panel-texto">
+              <span class="numero">01</span>
+              <h3>Una lámpara que también es <em>escultura</em></h3>
+              <p>Queríamos piezas que tuvieran sentido de día, cuando están apagadas, y que de noche cambiaran por completo. Por eso cada diseño juega con lamas, estrías y espirales que la luz atraviesa.</p>
+              <p class="pie">Seis diseños · nombres del mar, la seda y la luz</p>
+            </div>
+          </article>
+          <article class="panel" role="tabpanel" id="p-impresion" aria-labelledby="t-impresion" hidden>
+            <img src="assets/fotos/ola-doble/5.jpg" alt="Detalle de las lamas impresas en 3D de la lámpara Ola" loading="lazy" />
+            <div class="panel-texto">
+              <span class="numero">02</span>
+              <h3>Capa a capa, en <em>Málaga</em></h3>
+              <p>Cada lámpara se imprime en 3D en nuestro taller, capa sobre capa, hasta levantar formas que serían imposibles de hacer a mano. Después la montamos, la probamos y la revisamos antes de embalarla.</p>
+              <p class="pie">Impresión 3D · montaje a mano</p>
+            </div>
+          </article>
+          <article class="panel" role="tabpanel" id="p-encargo" aria-labelledby="t-encargo" hidden>
+            <img src="assets/fotos/marea/1.jpg" alt="Lámpara Marea apagada" loading="lazy" />
+            <div class="panel-texto">
+              <span class="numero">03</span>
+              <h3>Se hace cuando la <em>pides</em></h3>
+              <p>No guardamos almacenes llenos. Tu lámpara empieza a imprimirse cuando haces el pedido: tardamos de 3 a 5 días laborables en hacerla y de 2 a 4 en que te llegue, con envío gratis en España.</p>
+              <p class="pie" id="pie-entrega">Por encargo · envío gratis en España</p>
+            </div>
+          </article>
+          <article class="panel" role="tabpanel" id="p-material" aria-labelledby="t-material" hidden>
+            <img src="assets/fotos/seda/2.jpg" alt="Lámpara Seda encendida" loading="lazy" />
+            <div class="panel-texto">
+              <span class="numero">04</span>
+              <h3>Tres tonos, un <em>mando</em></h3>
+              <p>Luz LED regulable: cálida (3000 K), neutra (4000 K) o fría (6400 K), y la intensidad que quieras. Apenas da calor, así que puedes dejarla encendida toda la noche. Se conecta por USB de 5 V, con adaptador de enchufe incluido.</p>
+              <p class="pie">PLA · LED regulable · USB 5 V</p>
+            </div>
+          </article>
+        </div>
+        <blockquote class="cita">
+          <img src="assets/fotos/opalo/2.jpg" alt="" loading="lazy" />
+          <div>
+            <p>“La luz es el primer material con el que diseñamos.”</p>
+            <footer>— AURA Design</footer>
+            <a class="enlace-flecha enlace-claro" href="#taller">Cómo trabajamos <span aria-hidden="true">→</span></a>
+          </div>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- Tonos de luz interactivos -->
+    <section class="tonos" id="tonos">
+      <div class="ancho tonos-fila">
+        <div class="tonos-texto aparece">
+          <p class="antetitulo antetitulo-dorado">Elige tu luz</p>
+          <h2>Una lámpara, <em>tres</em> ambientes</h2>
+          <p>Con el mando del cable enciendes, apagas, cambias el tono y subes o bajas la intensidad. Pruébalo:</p>
+          <div class="tonos-botones" role="radiogroup" aria-label="Tono de luz">
+            <button role="radio" aria-checked="true" data-tono="calida"><i style="--c:#ffb565"></i>Cálida <small>3000 K</small></button>
+            <button role="radio" aria-checked="false" data-tono="neutra" tabindex="-1"><i style="--c:#fff1d6"></i>Neutra <small>4000 K</small></button>
+            <button role="radio" aria-checked="false" data-tono="fria" tabindex="-1"><i style="--c:#d8ecff"></i>Fría <small>6400 K</small></button>
+          </div>
+        </div>
+        <figure class="tonos-foto" id="tonos-foto" data-tono="calida">
+          <div class="capa-tono" data-capa="calida">
+            <img src="assets/fotos/tonos/calida.jpg" alt="Lámpara Lamas encendida" loading="lazy" />
+          </div>
+          <div class="capa-tono" data-capa="neutra">
+            <img src="assets/fotos/tonos/neutra.jpg" alt="" aria-hidden="true" loading="lazy" />
+          </div>
+          <div class="capa-tono" data-capa="fria">
+            <img src="assets/fotos/tonos/fria.jpg" alt="" aria-hidden="true" loading="lazy" />
+          </div>
+        </figure>
+      </div>
+    </section>
+
+    <!-- El taller -->
+    <section class="ancho seccion" id="taller">
+      <div class="taller aparece">
+        <p class="antetitulo taller-ante">El taller</p>
+        <h2>Lámparas 3D, hechas en <em>Málaga</em></h2>
+        <div class="taller-texto">
+          <p>Diseñamos e imprimimos cada lámpara en 3D en PLA, un plástico de origen vegetal que se fabrica a partir de recursos renovables como el almidón de maíz o la caña de azúcar, en lugar de petróleo. Es rígido, ligero y resistente para el uso diario, no es tóxico y, al final de su vida, se puede compostar en plantas industriales.</p>
+          <div class="taller-ctas">
+            <a class="enlace-flecha" href="#coleccion">Ver lámparas de mesa <span aria-hidden="true">→</span></a>
+            <a class="enlace-flecha" href="#contacto">Escríbenos <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </div>
+
+      <ol class="pasos" id="pasos">
+        <li class="aparece"><span class="numero">01</span><h3>Lo <em>diseñamos</em></h3><p>Dibujamos cada forma pensando en cómo se verá apagada y en cómo la atravesará la luz.</p></li>
+        <li class="aparece"><span class="numero">02</span><h3>Lo <em>imprimimos</em></h3><p>Al recibir tu pedido, la impresora levanta tu lámpara capa a capa. De 3 a 5 días laborables.</p></li>
+        <li class="aparece"><span class="numero">03</span><h3>Lo <em>montamos</em></h3><p>Le ponemos la luz LED y la montamos a mano, pieza a pieza. Después la revisamos con calma y la embalamos con mimo para que llegue perfecta.</p></li>
+        <li class="aparece"><span class="numero">04</span><h3>Te la <em>enviamos</em></h3><p>Envío gratis en España en 2 a 4 días. Si la pides hoy, te llega <strong id="entrega">en unos días</strong>.</p></li>
+      </ol>
+
+      <div class="manifiesto aparece">
+        <p class="antetitulo">Por encargo</p>
+        <p class="manifiesto-texto">Nada sale de la impresora hasta que alguien lo pide.<br />Así cada pieza se hace con calma y para una casa concreta, la tuya.</p>
+      </div>
+    </section>
+
+    <!-- Abanico de las seis lámparas -->
+    <section class="abanico" id="destacadas" aria-label="Las seis lámparas"></section>
+
+    <!-- Preguntas (desde aquí hasta el final, fondo oscuro) -->
+    <div class="preguntas-fondo">
+    <section class="ancho seccion preguntas" id="preguntas">
+      <div class="seccion-titulo aparece">
+        <div>
+          <p class="antetitulo">Preguntas frecuentes</p>
+          <h2>Todo lo que nos <em>preguntáis</em></h2>
+        </div>
+        <p>¿No encuentras tu respuesta? Escríbenos a <a href="mailto:impresiones.los3deseos@gmail.com">impresiones.los3deseos@gmail.com</a>.</p>
+      </div>
+      <div class="acordeon" id="acordeon"></div>
+    </section>
+    </div>
+
+    <!-- Cierre -->
+    <section class="cierre" id="contacto">
+      <div class="ancho cierre-contenido aparece">
+        <p class="antetitulo antetitulo-dorado">Hecho por encargo en Málaga</p>
+        <h2>¿Te llevas una a <em>casa</em>?</h2>
+        <p>Compra tu lámpara en nuestra tienda de Etsy o escríbenos para cualquier duda, regalo o idea.</p>
+        <div class="hero-ctas">
+          <a class="boton boton-claro" href="https://www.etsy.com/shop/Los3Deseos" target="_blank" rel="noopener">Comprar en Etsy <span aria-hidden="true">→</span></a>
+          <a class="enlace-flecha enlace-claro" href="mailto:impresiones.los3deseos@gmail.com">impresiones.los3deseos@gmail.com</a>
+        </div>
+        <ul class="confianza">
+          <li>Hecho en Málaga</li><li>Envío gratis en España</li><li>LED en 3 tonos</li><li>30 días de devolución</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pie-pagina">
+    <div class="ancho pie-rejilla">
+      <div class="pie-marca">
+        <a href="#inicio" class="logo"><span class="logo-texto"><span class="logo-nombre"><b>AURA</b> <i>design</i></span></span></a>
+        <p>Luz con forma, capa a capa.<br />Lámparas impresas en 3D en Málaga.</p>
+      </div>
+      <div>
+        <h4>Explorar</h4>
+        <a href="#coleccion">Colección</a>
+        <a href="#historia">Nosotros</a>
+        <a href="#taller">El taller</a>
+        <a href="#preguntas">Preguntas</a>
+      </div>
+      <div>
+        <h4>Compras</h4>
+        <a href="https://www.etsy.com/shop/Los3Deseos" target="_blank" rel="noopener">Tienda en Etsy</a>
+        <span>Envío gratis en España</span>
+        <span>30 días de devolución</span>
+      </div>
+      <div>
+        <h4>Contacto</h4>
+        <a href="mailto:impresiones.los3deseos@gmail.com">Email</a>
+        <a href="https://www.instagram.com/los3deseos_/" target="_blank" rel="noopener">Instagram · @los3deseos_</a>
+        <span>Málaga, España</span>
+      </div>
+    </div>
+    <div class="ancho pie-final">
+      <span>© <span id="anio">2026</span> AURA Design</span>
+      <span>Impreso en 3D · Por encargo · Málaga</span>
+    </div>
+  </footer>
+
+  <!-- Ficha de producto -->
+  <dialog class="ficha" id="ficha" aria-labelledby="ficha-nombre">
+    <button class="ficha-cerrar" id="ficha-cerrar" aria-label="Cerrar">×</button>
+    <div class="ficha-galeria">
+      <img id="ficha-foto" src="" alt="" />
+      <div class="ficha-miniaturas" id="ficha-miniaturas"></div>
+    </div>
+    <div class="ficha-datos">
+      <p class="antetitulo" id="ficha-distintivo">Hecho por encargo</p>
+      <h2 id="ficha-nombre"></h2>
+      <p class="ficha-precio" id="ficha-precio"></p>
+      <p id="ficha-descripcion"></p>
+      <dl class="ficha-specs">
+        <dt>Medidas</dt><dd id="ficha-medidas"></dd>
+        <dt>Material</dt><dd>PLA impreso en 3D</dd>
+        <dt>Luz</dt><dd>LED regulable: cálida, neutra o fría</dd>
+        <dt>Cable</dt><dd>USB 5 V con adaptador de enchufe</dd>
+        <dt>Entrega</dt><dd id="ficha-entrega"></dd>
+      </dl>
+      <a class="boton" id="ficha-comprar" href="#" target="_blank" rel="noopener">Comprar en Etsy <span aria-hidden="true">→</span></a>
+    </div>
+  </dialog>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
