@@ -301,10 +301,6 @@ function iniciarTonos() {
       sig.click(); sig.focus();
     });
   });
-  const rango = $("#intensidad");
-  const brillo = () => figura.style.setProperty("--brillo", rango.value / 100);
-  rango.addEventListener("input", brillo);
-  brillo();
 }
 
 /* ---------- apariciones y encendido en móvil ---------- */

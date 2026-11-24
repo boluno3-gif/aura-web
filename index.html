@@ -175,22 +175,24 @@
       <div class="ancho tonos-fila">
         <div class="tonos-texto aparece">
           <p class="antetitulo antetitulo-dorado">Elige tu luz</p>
-          <h2>Cálida para leer,<br />fría para <em>trabajar</em></h2>
+          <h2>Una lámpara, <em>tres</em> ambientes</h2>
           <p>Con el mando del cable enciendes, apagas, cambias el tono y subes o bajas la intensidad. Pruébalo:</p>
           <div class="tonos-botones" role="radiogroup" aria-label="Tono de luz">
             <button role="radio" aria-checked="true" data-tono="calida"><i style="--c:#ffb565"></i>Cálida <small>3000 K</small></button>
             <button role="radio" aria-checked="false" data-tono="neutra" tabindex="-1"><i style="--c:#fff1d6"></i>Neutra <small>4000 K</small></button>
             <button role="radio" aria-checked="false" data-tono="fria" tabindex="-1"><i style="--c:#d8ecff"></i>Fría <small>6400 K</small></button>
           </div>
-          <label class="intensidad">
-            <span>Intensidad</span>
-            <input type="range" min="20" max="100" value="85" id="intensidad" />
-          </label>
         </div>
         <figure class="tonos-foto" id="tonos-foto" data-tono="calida">
-          <img src="assets/fotos/seda/1.jpg" alt="Lámpara Seda encendida" loading="lazy" />
-          <img class="encendida" src="assets/fotos/seda/1.jpg" alt="" aria-hidden="true" loading="lazy" />
-          <span class="tinte"></span>
+          <div class="capa-tono" data-capa="calida">
+            <img src="assets/fotos/tonos/calida.jpg" alt="Lámpara Lamas encendida" loading="lazy" />
+          </div>
+          <div class="capa-tono" data-capa="neutra">
+            <img src="assets/fotos/tonos/neutra.jpg" alt="" aria-hidden="true" loading="lazy" />
+          </div>
+          <div class="capa-tono" data-capa="fria">
+            <img src="assets/fotos/tonos/fria.jpg" alt="" aria-hidden="true" loading="lazy" />
+          </div>
         </figure>
       </div>
     </section>
@@ -207,7 +209,6 @@
           <p>Trabajamos por encargo: nada sale de la impresora hasta que alguien lo pide. Así cada pieza se hace con calma y para una casa concreta, la tuya.</p>
           <div class="taller-ctas">
             <a class="enlace-flecha" href="#coleccion">Ver lámparas de mesa <span aria-hidden="true">→</span></a>
-            <a class="enlace-flecha" href="#pasos">Cómo las hacemos <span aria-hidden="true">→</span></a>
             <a class="enlace-flecha" href="#contacto">Escríbenos <span aria-hidden="true">→</span></a>
           </div>
         </div>
