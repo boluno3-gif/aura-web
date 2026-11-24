@@ -88,7 +88,7 @@ function pintarColeccion() {
   const etiqueta = ofertaActiva() ? `<span class="etiqueta">−${CONFIG.oferta.porcentaje} %</span>` : "";
   $("#rejilla").innerHTML = LAMPARAS.map((l, i) => `
     <article class="tarjeta aparece" style="transition-delay:${(i % 4) * 80}ms">
-      <button class="tarjeta-foto" data-abrir="${l.id}" aria-label="Ver ${l.nombre}">
+      <button class="tarjeta-foto" data-abrir="${l.id}" data-lampara="${l.id}" aria-label="Ver ${l.nombre}">
         ${etiqueta}
         ${l.distintivo ? `<span class="etiqueta etiqueta-suave">${l.distintivo}</span>` : ""}
         <img src="${fotoEstudio(l, "apagada")}" alt="Lámpara ${l.nombre} apagada" loading="lazy" />
@@ -110,7 +110,7 @@ function pintarColeccion() {
 function pintarDestacadas() {
   $("#destacadas").innerHTML = LAMPARAS.map((l, i) => `
     <article class="hoja${i === 0 ? " activa" : ""}" tabindex="0" aria-label="${l.nombre}">
-      <img src="${foto(l, 1)}" alt="Lámpara ${l.nombre} encendida" loading="lazy" />
+      <img src="assets/fotos/abanico/${ESTUDIO[l.id]}.jpg" alt="Lámpara ${l.nombre} encendida" loading="lazy" />
       <span class="hoja-nombre-corto" aria-hidden="true">${l.nombre}</span>
       <div class="hoja-texto">
         <p class="hoja-ante">Hecha por encargo · ${l.medidas}</p>

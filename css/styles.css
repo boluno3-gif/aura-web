@@ -205,12 +205,15 @@ h1 em, h2 em, h3 em {
   position: relative; aspect-ratio: 4 / 5; border-radius: var(--radio); overflow: hidden;
   background: var(--crema-2); cursor: pointer; border: 0; padding: 0; width: 100%;
 }
-.tarjeta-foto img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity .8s var(--ease), transform 1.2s var(--ease); }
+.tarjeta-foto img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: scale(var(--zoom, 1)); transition: opacity .8s var(--ease), transform 1.2s var(--ease); }
+/* Lamas y Marea salen más pequeñas en su foto: se acercan un poco */
+.tarjeta-foto[data-lampara="lamas"] { --zoom: 1.25; }
+.tarjeta-foto[data-lampara="marea-mini"] { --zoom: 1.25; }
 .tarjeta-foto .encendida { opacity: 0; }
 .tarjeta:hover .tarjeta-foto .encendida,
 .tarjeta.encendida .tarjeta-foto .encendida,
 .tarjeta-foto:focus-visible .encendida { opacity: 1; }
-.tarjeta:hover .tarjeta-foto img { transform: scale(1.04); }
+.tarjeta:hover .tarjeta-foto img { transform: scale(calc(var(--zoom, 1) * 1.04)); }
 .etiqueta {
   position: absolute; top: 14px; left: 14px; z-index: 2;
   background: var(--terracota); color: var(--papel);
@@ -318,10 +321,27 @@ h1 em, h2 em, h3 em {
   transition: opacity .2s linear;
 }
 #coleccion { padding-top: clamp(40px, 5vw, 64px); padding-bottom: clamp(40px, 5vw, 64px); }
-#historia { padding-top: clamp(16px, 2vw, 24px); }
+#historia { padding-top: clamp(16px, 2vw, 24px); padding-bottom: clamp(32px, 4vw, 56px); }
+.historia-paneles { display: flex; }
+.historia-paneles .panel { flex: 1; }
 .seccion-sub { margin-top: 20px; color: var(--apagado); }
 /* En pantallas anchas va en una sola línea; en móvil y tablet sigue partiéndose */
 @media (min-width: 1100px) { .seccion-sub { white-space: nowrap; } }
+
+/* Colección sobre un panel negro */
+.coleccion-fondo {
+  margin: clamp(10px, 1vw, 16px); background: #100c0a; color: var(--crema);
+  border-radius: 28px;
+}
+.coleccion-fondo :is(h2, h3) { color: var(--crema); }
+.coleccion-fondo .antetitulo, .coleccion-fondo h2 em, .coleccion-fondo .precio { color: var(--ambar); }
+.coleccion-fondo .etiqueta:not(.etiqueta-suave) { background: var(--ambar); color: #100c0a; }
+.coleccion-fondo .seccion-sub { color: rgba(242, 236, 226, .7); }
+.coleccion-fondo .tarjeta-medidas,
+.coleccion-fondo .precio s { color: rgba(242, 236, 226, .5); }
+.coleccion-fondo .tarjeta-acciones button { color: var(--crema); border-bottom-color: rgba(242, 236, 226, .3); }
+.coleccion-fondo .tarjeta-acciones a { color: var(--crema); }
+.coleccion-fondo .tarjeta-foto { box-shadow: 0 18px 40px rgba(0, 0, 0, .45); }
 
 /* Historia */
 .pestanas { display: flex; flex-wrap: wrap; gap: 8px; border-bottom: 1px solid var(--linea); padding-bottom: 18px; }
@@ -336,10 +356,23 @@ h1 em, h2 em, h3 em {
 .panel { display: grid; grid-template-columns: 1fr 1fr; background: var(--papel); border-radius: 24px; overflow: hidden; min-height: 520px; animation: entra .6s var(--ease); }
 .panel[hidden] { display: none; }
 .panel img { width: 100%; height: 100%; object-fit: cover; }
+.panel { position: relative; }
+#p-idea { overflow: hidden; }
+#p-idea img { transform: scale(1.15); transform-origin: 50% 55%; }
+#p-idea .panel-texto { position: relative; z-index: 1; background: var(--papel); }
 .panel-texto { padding: clamp(28px, 4vw, 52px); display: flex; flex-direction: column; gap: 18px; }
 .panel-texto p { color: var(--apagado); }
 .panel-texto .pie { margin-top: auto; font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--terracota); }
 .numero { font-family: var(--display); font-size: 17px; font-weight: 400; color: var(--terracota); letter-spacing: .02em; }
+/* En pantallas grandes, la historia más ancha y menos alta */
+@media (min-width: 1021px) {
+  .historia { width: min(1640px, calc(100vw - 2 * max(20px, 3vw))); align-self: center; grid-template-columns: 2.3fr 1fr; }
+  .panel { grid-template-columns: 1fr 1.9fr; min-height: 280px; }
+  .panel-texto { padding: 28px 44px; gap: 12px; }
+  .cita { min-height: 280px; }
+  .cita > div { padding: 26px 30px; }
+  .cita p { font-size: clamp(24px, 2.2vw, 32px); }
+}
 @keyframes entra { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
 .cita { position: relative; margin: 0; border-radius: 24px; overflow: hidden; color: var(--crema); min-height: 520px; display: flex; align-items: flex-end; }
 .cita img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
