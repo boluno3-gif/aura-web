@@ -183,7 +183,7 @@ h1 em, h2 em, h3 em {
   .hero-video { inset: 0; width: 100%; height: 100%; max-height: none; object-fit: cover; object-position: 72% center; -webkit-mask-image: none; mask-image: none; }
 }
 .hero-velo { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(26,18,12,.45) 0%, rgba(26,18,12,.15) 35%, rgba(26,18,12,.75) 100%); }
-.hero-contenido { position: relative; width: 100%; padding-bottom: clamp(90px, 14vh, 150px); padding-top: 140px; }
+.hero-contenido { position: relative; width: 100%; max-width: none; margin: 0;padding-bottom: clamp(90px, 14vh, 150px); padding-top: 140px; }
 .hero h1 { max-width: 10em; }
 .hero-sub { max-width: 32em; font-size: clamp(17px, 1.5vw, 20px); color: rgba(243,236,226,.86); margin: 28px 0 36px; }
 .hero-ctas { display: flex; flex-wrap: wrap; align-items: center; gap: 18px 30px; }
@@ -231,6 +231,52 @@ h1 em, h2 em, h3 em {
 .tarjeta-acciones { display: flex; gap: 20px; font-size: 14px; }
 .tarjeta-acciones button { background: none; border: 0; padding: 0; font: inherit; font-weight: 700; cursor: pointer; color: var(--oscuro); border-bottom: 1px solid var(--linea); }
 .tarjeta-acciones a { font-weight: 700; text-decoration: none; border-bottom: 1px solid currentColor; }
+
+/* Vitrina: panel oscuro con lámparas que se encienden al bajar */
+.vitrina { padding: clamp(10px, 1vw, 16px); }
+.vitrina-panel {
+  background: #100c0a; color: var(--crema);
+  border-radius: 28px; padding: clamp(18px, 2.4vw, 32px);
+}
+.vitrina-cabeza { display: flex; justify-content: space-between; align-items: center; margin-bottom: clamp(18px, 2vw, 26px); }
+.vitrina-cabeza p { font-size: 11px; letter-spacing: .3em; text-transform: uppercase; color: rgba(243,236,226,.5); }
+.vitrina-cabeza a { font-size: 12px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; text-decoration: none; }
+.vitrina-cabeza a span { display: inline-block; transition: transform .3s var(--ease); }
+.vitrina-cabeza a:hover span { transform: translateX(4px); }
+.vitrina-fila { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
+.foco {
+  position: relative; aspect-ratio: 3 / 4; border-radius: 14px; overflow: hidden; background: #000;
+  transition: box-shadow 1.2s var(--ease);
+}
+.foco img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity 1.1s var(--ease), filter 1.1s var(--ease), transform 1.4s var(--ease); }
+.foco .apagada { filter: brightness(.36) saturate(.7); }
+.foco .encendida { opacity: 0; transform: scale(1.03); }
+.foco.on .apagada { filter: brightness(.6) saturate(.9); }
+.foco.on .encendida { opacity: 1; transform: scale(1); }
+.foco.on { box-shadow: 0 30px 70px -30px rgba(255, 170, 90, .45); }
+.foco::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 55%, rgba(10,7,5,.85) 100%); pointer-events: none; }.foco-abrir { position: absolute; inset: 0; z-index: 1; border: 0; padding: 0; background: none; cursor: pointer; border-radius: inherit; }
+.foco .etiqueta { background: rgba(243,236,226,.16); color: var(--crema); backdrop-filter: blur(6px); font-size: 11px; padding: 4px 10px; }
+.foco-info {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; pointer-events: none;
+  display: flex; justify-content: space-between; align-items: flex-end; gap: 10px;
+  padding: clamp(12px, 1.2vw, 18px);
+}
+.foco-info h3 { font-family: var(--texto); font-size: 15px; font-weight: 600; letter-spacing: .02em; text-transform: uppercase; }
+.foco-precio { font-size: 13px; color: rgba(243,236,226,.9); }
+.foco-precio s { opacity: .5; margin-right: 6px; }
+.foco-comprar {
+  pointer-events: auto; flex: none; text-decoration: none;
+  font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+  padding: 7px 14px; border-radius: 999px; border: 1px solid rgba(243,236,226,.45);
+  transition: background .3s, color .3s;
+}
+.foco-comprar:hover { background: var(--crema); color: var(--oscuro); }
+@media (max-width: 1020px) { .vitrina-fila { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 560px) {
+  .vitrina-fila { grid-template-columns: repeat(2, 1fr); }
+  .foco-info { flex-direction: column; align-items: flex-start; }
+  .foco-info h3 { font-size: 13px; }
+}
 
 /* De día a noche */
 .anochecer { position: relative; height: 260vh; background: var(--crema); --p: 0; }

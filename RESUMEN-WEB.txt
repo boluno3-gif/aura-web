@@ -1,0 +1,184 @@
+RESUMEN DE LA WEB - AURA Design (Los 3 Deseos)
+Lámparas de mesa impresas en 3D en Málaga
+Actualizado: 24/11/2026
+==============================================================
+
+QUÉ ES
+------
+Una web de una sola página para presentar y vender las lámparas. La venta
+se hace en la tienda de Etsy (Los3Deseos): la web enseña las lámparas y
+manda a Etsy para comprar.
+
+Es una web sencilla (HTML, CSS y JavaScript), sin instalar nada: basta con
+abrir index.html en el navegador.
+
+
+ARCHIVOS
+--------
+  index.html        La página: textos y orden de las secciones.
+  css/styles.css    El aspecto: colores, tipografías, tamaños y animaciones.
+                    Los colores y fuentes de la marca están al principio.
+  js/main.js        Los datos y el comportamiento: lámparas, precios,
+                    oferta, preguntas frecuentes y efectos al bajar.
+                    Lo editable está al principio del archivo.
+  assets/fotos/     Una carpeta por lámpara con sus fotos
+                    (la foto 1 es la lámpara encendida y la 2 apagada).
+                    portada.jpg es la imagen de la portada.
+  assets/video/     portada.mp4 (ahora mismo no se usa en la página).
+  assets/favicon.svg  Icono de la pestaña del navegador.
+  README.md         Explicación breve del proyecto.
+
+
+IDENTIDAD VISUAL
+----------------
+  - Nombre: AURA design. Logo en texto: "AURA" con "design" debajo en
+    mayúsculas pequeñas.
+  - Colores: crema y papel de fondo, marrón oscuro para el texto, negro
+    cálido en las zonas de noche y toques de terracota, dorado y ámbar.
+  - Tipografías: DM Serif Display para los títulos, Instrument Serif en
+    cursiva para la última palabra destacada de cada título, e Inter para
+    el texto normal.
+  - Lema: "Pide un deseo. Enciéndelo."
+
+
+LAS LÁMPARAS (7)
+----------------
+  Lámpara            Precio   Medidas
+  Árbol de Navidad   34,90 €  12 × 27,5 × 12 cm   (de temporada)
+  Aurora             49,90 €  17 × 18,8 × 17 cm
+  Lamas              44,90 €  11 × 22 × 11 cm
+  Ola Doble          44,90 €  11 × 22 × 11 cm
+  Seda               39,90 €  15 × 22 × 15 cm
+  Ópalo Mini         34,90 €  13,5 × 21 × 13,5 cm
+  Marea Mini         34,90 €  13,2 × 19,6 × 13,2 cm
+
+  Cada una tiene su nombre, precio, medidas, enlace a Etsy, una frase corta,
+  una descripción y sus fotos. Todo esto se cambia en la lista LAMPARAS de
+  js/main.js.
+
+
+RECORRIDO DE LA PÁGINA (de arriba abajo)
+---------------------------------------
+1. CABECERA
+   Barra flotante con forma de píldora: logo, menú (Colección, Nosotros,
+   El taller, Preguntas, Contacto), Instagram y botón "Tienda en Etsy".
+   Es negra arriba del todo y pasa a crema al bajar. En el móvil, el menú
+   se abre con un botón de hamburguesa.
+
+2. PORTADA
+   Foto de una mano acercándose a una lámpara encendida, a pantalla
+   completa.
+   - Antetítulo: "Hecho a mano en Málaga"
+   - Título: "Luz con forma para cada rincón"
+   - Texto: "Lámparas de mesa fabricadas por encargo. Una a una, capa a
+     capa / Con luz LED regulable en tres tonos"
+   - Botones: "Ver la colección" y "mira cómo nace cada lámpara"
+   - Indicador "Scroll" animado.
+   Todo el bloque de texto está alineado a la izquierda.
+
+3. DESTACADAS (panel oscuro)
+   Seis lámparas en fila: Aurora, Lamas, Ola Doble, Seda, Ópalo Mini y
+   Marea Mini. Al llegar están apagadas y en penumbra, y al bajar se van
+   encendiendo una tras otra, de izquierda a derecha. Si se sube, se
+   apagan. Cada tarjeta lleva nombre, precio y botón "Comprar" (a Etsy);
+   al pulsar la tarjeta se abre la ficha de la lámpara.
+   6 columnas en ordenador, 3 en tablet y 2 en móvil.
+
+4. LA COLECCIÓN: "Siete formas de encender la casa"
+   Rejilla con las 7 lámparas. En el ordenador, al pasar el ratón la
+   lámpara se enciende (cambia de la foto apagada a la encendida). En el
+   móvil se encienden solas al pasar por el centro de la pantalla.
+   Cada una tiene "Ver detalles" (abre la ficha) y "Comprar" (Etsy).
+
+5. DE DÍA A NOCHE: "Cuando cae la tarde, tu casa se enciende"
+   Escena que se queda fija mientras se baja: el fondo pasa de claro a
+   oscuro y la lámpara Aurora se va encendiendo poco a poco. El rótulo
+   cambia de "apagada" a "encendida".
+
+6. NUESTRA HISTORIA: "Pide un deseo, enciéndelo"
+   Cuatro pestañas, cada una con foto y texto:
+     01 La idea: lámparas que también son esculturas.
+     02 La impresión: capa a capa, en Málaga.
+     03 Por encargo: se hace cuando la pides.
+     04 La luz: tres tonos y un mando.
+   Al lado, una cita: "La luz es el primer material con el que diseñamos."
+
+7. ELIGE TU LUZ: "Cálida para leer, fría para trabajar"
+   Demostración interactiva con la lámpara Seda: botones Cálida (3000 K),
+   Neutra (4000 K) y Fría (6400 K), y una barra de intensidad. La foto
+   cambia de tono y de brillo al tocarlos.
+
+8. EL TALLER: "Lámparas escultóricas, hechas en Málaga"
+   Texto sobre cómo se trabaja (PLA, montaje a mano, por encargo) y cuatro
+   pasos: Lo diseñamos, Lo imprimimos, Lo montamos y Te la enviamos.
+   El último paso calcula solo la fecha aproximada de entrega si se pide
+   hoy.
+
+9. LÁMPARAS GRANDES
+   Aurora y Ola Doble a gran tamaño, con su frase, precio y los botones
+   "Descubrir" y "Comprar".
+
+10. PREGUNTAS FRECUENTES: "Todo lo que nos preguntáis"
+    Ocho preguntas desplegables: encendido y tonos, enchufe, calor, dejarla
+    encendida de noche, fragilidad, limpieza, regalo y devoluciones.
+
+11. CIERRE: "¿Te llevas una a casa?"
+    Botón "Comprar en Etsy", correo de contacto y cuatro garantías:
+    Hecho en Málaga, Envío gratis, LED en 3 tonos y 30 días de devolución.
+
+12. PIE DE PÁGINA
+    Logo y lema, enlaces (Explorar, Compras, Contacto, Instagram
+    @los3deseos_) y año actualizado automáticamente.
+
+FICHA DE PRODUCTO (ventana emergente)
+    Se abre al pulsar cualquier lámpara. Muestra todas sus fotos en
+    miniatura, precio, descripción, medidas, material (PLA), luz (LED
+    regulable), cable (USB 5 V con adaptador), fecha estimada de entrega y
+    botón "Comprar en Etsy".
+
+
+COSAS AUTOMÁTICAS
+-----------------
+  - OFERTA: entre el 23/11/2026 y el 01/12/2026 (Black Friday) se aplica
+    un 20 % de descuento. Se ve el precio tachado, el rebajado y la etiqueta
+    "-20 %". Al terminar la fecha, los precios vuelven solos a la normalidad.
+  - FECHA DE ENTREGA: se calcula con 3-5 días laborables de fabricación más
+    2-4 días de envío, sin contar fines de semana ni los festivos indicados
+    (8 dic, 25 dic, 1 ene y 6 ene).
+  - ANIMACIONES: los bloques aparecen suavemente al bajar. Si alguien tiene
+    activado "reducir movimiento" en su dispositivo, se muestran sin
+    animación y con las lámparas ya encendidas.
+  - Se adapta a ordenador, tablet y móvil.
+
+
+CÓMO CAMBIAR LO MÁS HABITUAL (todo en js/main.js)
+-------------------------------------------------
+  - Precios, textos o fotos de una lámpara: lista LAMPARAS.
+  - Oferta (porcentaje, nombre y fechas): CONFIG -> oferta.
+  - Plazos de fabricación y envío, festivos: CONFIG.
+  - Lámparas de la sección "Destacadas": lista VITRINA.
+  - Lámparas grandes: lista DESTACADAS.
+  - Preguntas frecuentes: lista PREGUNTAS.
+  - Para añadir fotos de una lámpara nueva: crear su carpeta en
+    assets/fotos/ con 1.jpg (encendida), 2.jpg (apagada) y el resto, e
+    indicar cuántas hay en el campo "fotos".
+
+
+CAMBIOS DE HOY (24/11/2026)
+---------------------------
+  1. El texto de la portada se ha alineado a la izquierda.
+  2. Nuevo texto bajo el título de la portada.
+  3. Nueva sección "Destacadas", con lámparas que se encienden una a una
+     al bajar.
+  4. Se probaron fondos de colores en las Destacadas, pero se descartaron.
+     Para hacerlo bien harían falta fotos de las lámparas sin fondo
+     (PNG transparente).
+
+
+PENDIENTE O A REVISAR
+---------------------
+  - El vídeo assets/video/portada.mp4 está en la carpeta pero no se usa;
+    la portada muestra la foto portada.jpg.
+  - La oferta de Black Friday termina el 01/12/2026. Para Navidad hay
+    preparada una fecha límite de pedido (10/12/2026), pero ahora mismo
+    no se muestra en la página.

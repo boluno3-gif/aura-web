@@ -127,6 +127,41 @@ function pintarDestacadas() {
   }).join("");
 }
 
+/* ---------- vitrina: se encienden una a una al bajar ---------- */
+const VITRINA = ["aurora", "lamas", "ola-doble", "seda", "opalo-mini", "marea-mini"];
+
+function pintarVitrina() {
+  const etiqueta = ofertaActiva() ? `<span class="etiqueta">−${CONFIG.oferta.porcentaje} %</span>` : "";
+  $("#vitrina-fila").innerHTML = VITRINA.map((id) => {
+    const l = LAMPARAS.find((x) => x.id === id);
+    return `
+      <article class="foco">
+        <button class="foco-abrir" data-abrir="${l.id}" aria-label="Ver ${l.nombre}"></button>
+        ${etiqueta}
+        <img class="apagada" src="${foto(l, 2)}" alt="Lámpara ${l.nombre}" loading="lazy" />
+        <img class="encendida" src="${foto(l, 1)}" alt="" aria-hidden="true" loading="lazy" />        <div class="foco-info">
+          <div><h3>${l.nombre}</h3><span class="foco-precio">${precioHTML(l)}</span></div>
+          <a class="foco-comprar" href="${enlaceEtsy(l)}" target="_blank" rel="noopener">Comprar</a>
+        </div>
+      </article>`;
+  }).join("");
+}
+
+function iniciarVitrina() {
+  const panel = $(".vitrina-panel");
+  const focos = $$(".foco");
+  if (reduceMovimiento) { focos.forEach((f) => f.classList.add("on")); return; }
+  const actualizar = () => {
+    const r = panel.getBoundingClientRect();
+    // 0 cuando el panel asoma por abajo; 1 cuando ya está bien dentro de la pantalla
+    const p = (innerHeight * 0.85 - r.top) / (r.height * 0.5 + innerHeight * 0.35);
+    focos.forEach((f, i) => f.classList.toggle("on", p > (i + 1) / (focos.length + 1)));
+  };
+  addEventListener("scroll", () => requestAnimationFrame(actualizar), { passive: true });
+  addEventListener("resize", actualizar);
+  actualizar();
+}
+
 function pintarPreguntas() {
   $("#acordeon").innerHTML = PREGUNTAS.map(([p, r], i) => `
     <details class="aparece">
@@ -272,11 +307,13 @@ function iniciarApariciones() {
 
 /* ---------- arranque ---------- */
 pintarColeccion();
+pintarVitrina();
 pintarDestacadas();
 pintarPreguntas();
 iniciarFicha();
 iniciarCabecera();
 iniciarAnochecer();
+iniciarVitrina();
 iniciarPestanas();
 iniciarTonos();
 iniciarApariciones();
