@@ -243,17 +243,19 @@ h1 em, h2 em, h3 em {
 .vitrina-cabeza a { font-size: 12px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; text-decoration: none; }
 .vitrina-cabeza a span { display: inline-block; transition: transform .3s var(--ease); }
 .vitrina-cabeza a:hover span { transform: translateX(4px); }
-.vitrina-fila { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
+.vitrina-fila { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+/* --luz va de 0 (apagada: oscura y sin color) a 1 (encendida: la foto tal cual) */
 .foco {
+  --luz: 0;
   position: relative; aspect-ratio: 3 / 4; border-radius: 14px; overflow: hidden; background: #000;
-  transition: box-shadow 1.2s var(--ease);
+  box-shadow: 0 30px 70px -30px rgba(255, 170, 90, calc(var(--luz) * .45));
 }
-.foco img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity 1.1s var(--ease), filter 1.1s var(--ease), transform 1.4s var(--ease); }
-.foco .apagada { filter: brightness(.36) saturate(.7); }
-.foco .encendida { opacity: 0; transform: scale(1.03); }
-.foco.on .apagada { filter: brightness(.6) saturate(.9); }
-.foco.on .encendida { opacity: 1; transform: scale(1); }
-.foco.on { box-shadow: 0 30px 70px -30px rgba(255, 170, 90, .45); }
+.foco img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  filter: brightness(calc(.16 + var(--luz) * .84)) saturate(calc(.25 + var(--luz) * .75)) contrast(calc(1.15 - var(--luz) * .15));
+  transform: scale(calc(1.04 - var(--luz) * .04));
+  transition: filter .35s linear, transform .35s linear;
+}
 .foco::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 55%, rgba(10,7,5,.85) 100%); pointer-events: none; }.foco-abrir { position: absolute; inset: 0; z-index: 1; border: 0; padding: 0; background: none; cursor: pointer; border-radius: inherit; }
 .foco .etiqueta { background: rgba(243,236,226,.16); color: var(--crema); backdrop-filter: blur(6px); font-size: 11px; padding: 4px 10px; }
 .foco-info {
@@ -271,8 +273,7 @@ h1 em, h2 em, h3 em {
   transition: background .3s, color .3s;
 }
 .foco-comprar:hover { background: var(--crema); color: var(--oscuro); }
-@media (max-width: 1020px) { .vitrina-fila { grid-template-columns: repeat(3, 1fr); } }
-@media (max-width: 560px) {
+@media (max-width: 1020px) { .vitrina-fila { grid-template-columns: repeat(3, 1fr); } }@media (max-width: 560px) {
   .vitrina-fila { grid-template-columns: repeat(2, 1fr); }
   .foco-info { flex-direction: column; align-items: flex-start; }
   .foco-info h3 { font-size: 13px; }
@@ -282,24 +283,42 @@ h1 em, h2 em, h3 em {
 .anochecer { position: relative; height: 260vh; background: var(--crema); --p: 0; }
 .anochecer-fijo {
   position: sticky; top: 0; height: 100vh; overflow: hidden;
-  display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 5vw;
-  padding-inline: max(20px, 4vw);
-  background: color-mix(in srgb, var(--noche) calc(var(--p) * 100%), var(--crema));
-  color: color-mix(in srgb, var(--crema) calc(var(--p) * 100%), var(--oscuro));
+  display: flex; align-items: flex-end;
+  padding: 0 max(20px, 4vw) max(56px, 9vh);
+  background: var(--noche);
+  color: var(--crema);
 }
-.anochecer-texto { max-width: 560px; justify-self: end; }
-.anochecer h2 { display: grid; }
-.frase { transition: opacity .2s linear; }
-.frase-dia { opacity: calc(1 - var(--p) * .6); }
-.frase-noche { opacity: calc(.18 + var(--p) * .82); color: color-mix(in srgb, var(--ambar) calc(var(--p) * 100%), var(--oscuro)); }
-.anochecer-sub { margin: 28px 0 32px; max-width: 30em; opacity: .85; }
-.anochecer-foto { position: relative; margin: 0; height: min(78vh, 760px); aspect-ratio: 4 / 5; border-radius: 24px; overflow: hidden; justify-self: start; box-shadow: 0 40px 120px -40px rgba(255, 170, 90, calc(var(--p) * .55)); }
-.anochecer-foto img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.anochecer-foto .encendida { opacity: var(--p); }
-.anochecer-foto figcaption {
-  position: absolute; left: 16px; bottom: 16px; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+/* Fondo a pantalla completa: foto de día que se funde con la de noche al bajar */
+.anochecer-fondo { position: absolute; inset: 0; }
+.anochecer-fondo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 25% center; }
+.anochecer-fondo .encendida { opacity: var(--p); }
+/* Sombra suave en la esquina inferior izquierda para que el texto claro se lea */
+.anochecer-fondo::after {
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 65% 60% at 0% 100%, rgba(14,10,7,.72) 0%, rgba(14,10,7,.4) 45%, transparent 100%);
+}
+.anochecer-texto { position: relative; }
+.anochecer-estado {
+  position: absolute; right: max(20px, 4vw); bottom: 28px;
+  font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
   background: rgba(26,18,12,.55); color: var(--crema); padding: 7px 13px; border-radius: 999px; backdrop-filter: blur(6px);
 }
+/* De día solo se ve "Cuando cae la tarde…"; al encenderse la lámpara se cambia por "…tu casa se enciende" */
+.anochecer h2 { display: grid; }
+.anochecer h2 { font-size: clamp(28px, 5vw, 64px); }
+.frase { grid-area: 1 / 1; white-space: nowrap;transition: opacity .2s linear, transform .2s linear; }
+.frase-dia { opacity: clamp(0, calc(1 - var(--p) * 2.2), 1); transform: translateY(calc(var(--p) * -14px)); }
+.frase-noche { opacity: clamp(0, calc(var(--p) * 2.2 - 1.2), 1); transform: translateY(calc((1 - var(--p)) * 14px)); }
+.anochecer-enlace { margin-top: 32px; }
+/* "De día a noche" y "Explora la colección" también desaparecen en el hueco entre las dos frases */
+.anochecer .antetitulo, .anochecer-enlace {
+  opacity: max(clamp(0, calc(1 - var(--p) * 2.2), 1), clamp(0, calc(var(--p) * 2.2 - 1.2), 1));
+  transition: opacity .2s linear;
+}
+#coleccion { padding-top: clamp(40px, 5vw, 64px); }
+.seccion-sub { margin-top: 20px; color: var(--apagado); }
+/* En pantallas anchas va en una sola línea; en móvil y tablet sigue partiéndose */
+@media (min-width: 1100px) { .seccion-sub { white-space: nowrap; } }
 
 /* Historia */
 .pestanas { display: flex; flex-wrap: wrap; gap: 8px; border-bottom: 1px solid var(--linea); padding-bottom: 18px; }
@@ -465,10 +484,13 @@ h1 em, h2 em, h3 em {
   .cabecera.menu-abierto { color: var(--oscuro); }
   .hamburguesa { display: block; }
   .cabecera-acciones .boton-pequeno { display: none; }
-  .anochecer-fijo { grid-template-columns: 1fr; align-content: center; gap: 28px; padding-block: 90px 30px; }
-  .anochecer-texto { justify-self: start; }
-  .anochecer-foto { height: 46vh; justify-self: center; }
-  .anochecer-sub { display: none; }
+  /* Móvil: la lámpara se centra en la foto y el texto va abajo, sobre un velo */
+  .anochecer-fijo { align-items: flex-end; padding: 0 max(20px, 4vw) 80px; }
+  .anochecer-fondo img { object-position: 50% center; }
+  .anochecer-fondo::after {
+    background: linear-gradient(0deg, rgba(14,10,7,.8) 0%, rgba(14,10,7,.4) 30%, transparent 48%);
+  }
+  .anochecer-estado { top: 100px; bottom: auto; }
   .panel { grid-template-columns: 1fr; }
   .panel img { aspect-ratio: 4 / 3; height: auto; }
   .tonos-fila, .taller, .destacadas { grid-template-columns: 1fr; }

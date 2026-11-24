@@ -25,16 +25,16 @@ const LAMPARAS = [
   { id: "lamas", nombre: "Lamas", precio: 44.9, medidas: "11 × 22 × 11 cm", etsy: "4618371309", carpeta: "lamas", fotos: 19,
     lema: "La luz se cuela entre las lamas y dibuja sombras suaves.",
     descripcion: "Una lámpara de mesa de lamas onduladas sobre una base acanalada. Apagada parece una escultura, y encendida la luz se cuela entre las lamas y dibuja sombras suaves. Queda bien en la mesita de noche, una estantería o el salón." },
-  { id: "ola-doble", nombre: "Ola Doble", precio: 44.9, medidas: "11 × 22 × 11 cm", etsy: "4622715284", carpeta: "ola-doble", fotos: 14,
+  { id: "ola-doble", nombre: "Ola", precio: 44.9, medidas: "11 × 22 × 11 cm", etsy: "4622715284", carpeta: "ola-doble", fotos: 14,
     lema: "Decenas de lamas que se ondulan en doble ola de arriba abajo.",
     descripcion: "Una lámpara de mesa en forma de columna, con decenas de lamas blancas que se ondulan en doble ola y cambian de aspecto desde cada ángulo. Apagada parece una escultura, y encendida la luz se filtra entre las lamas y dibuja una trama cálida y suave. Alta y esbelta, queda bien en el salón, una consola, el escritorio o la mesita de noche." },
   { id: "seda", nombre: "Seda", precio: 39.9, medidas: "15 × 22 × 15 cm", etsy: "4622739074", carpeta: "seda", fotos: 12,
     lema: "Una silueta suave que se retuerce, con estrías finas como la seda.",
     descripcion: "Una lámpara de mesa de líneas suaves que gira sobre sí misma, con un acabado de estrías finas que recuerda a la seda, sobre una base redonda en tono madera. Apagada luce como una pieza de decoración, y encendida reparte una luz uniforme y cálida. Queda bien en el salón, el escritorio, una estantería o la mesita de noche." },
-  { id: "opalo-mini", nombre: "Ópalo Mini", precio: 34.9, medidas: "13,5 × 21 × 13,5 cm", etsy: "4616261694", carpeta: "opalo", fotos: 15,
+  { id: "opalo-mini", nombre: "Ópalo", precio: 34.9, medidas: "13,5 × 21 × 13,5 cm", etsy: "4616261694", carpeta: "opalo", fotos: 15,
     lema: "Brilla entera, como una piedra de ópalo con luz dentro.",
     descripcion: "Una lámpara de mesa con forma ondulada y retorcida. Apagada luce como una pieza de decoración, y encendida brilla entera con una luz cálida y suave. Queda bien en la mesita de noche, una estantería o el salón." },
-  { id: "marea-mini", nombre: "Marea Mini", precio: 34.9, medidas: "13,2 × 19,6 × 13,2 cm", etsy: "4615974607", carpeta: "marea", fotos: 13,
+  { id: "marea-mini", nombre: "Marea", precio: 34.9, medidas: "13,2 × 19,6 × 13,2 cm", etsy: "4615974607", carpeta: "marea", fotos: 13,
     lema: "Una espiral trenzada que se levanta capa a capa.",
     descripcion: "Una lámpara de mesa con forma de espiral trenzada. Apagada luce como una pieza de decoración, y encendida la trama reparte una luz cálida y suave. Queda bien en la mesita de noche, una estantería o el salón." },
 ];
@@ -128,18 +128,24 @@ function pintarDestacadas() {
 }
 
 /* ---------- vitrina: se encienden una a una al bajar ---------- */
-const VITRINA = ["aurora", "lamas", "ola-doble", "seda", "opalo-mini", "marea-mini"];
+// [lámpara, foto en assets/fotos/vitrina/]
+const VITRINA = [
+  ["lamas", "lamas.jpg"],
+  ["ola-doble", "ola-doble.jpg"],
+  ["seda", "seda.jpg"],
+  ["opalo-mini", "opalo.jpg"],
+  ["marea-mini", "marea.jpg"],
+];
 
 function pintarVitrina() {
   const etiqueta = ofertaActiva() ? `<span class="etiqueta">−${CONFIG.oferta.porcentaje} %</span>` : "";
-  $("#vitrina-fila").innerHTML = VITRINA.map((id) => {
+  $("#vitrina-fila").innerHTML = VITRINA.map(([id, archivo]) => {
     const l = LAMPARAS.find((x) => x.id === id);
     return `
       <article class="foco">
         <button class="foco-abrir" data-abrir="${l.id}" aria-label="Ver ${l.nombre}"></button>
         ${etiqueta}
-        <img class="apagada" src="${foto(l, 2)}" alt="Lámpara ${l.nombre}" loading="lazy" />
-        <img class="encendida" src="${foto(l, 1)}" alt="" aria-hidden="true" loading="lazy" />        <div class="foco-info">
+        <img src="assets/fotos/vitrina/${archivo}" alt="Lámpara ${l.nombre} encendida" loading="lazy" />        <div class="foco-info">
           <div><h3>${l.nombre}</h3><span class="foco-precio">${precioHTML(l)}</span></div>
           <a class="foco-comprar" href="${enlaceEtsy(l)}" target="_blank" rel="noopener">Comprar</a>
         </div>
@@ -150,12 +156,18 @@ function pintarVitrina() {
 function iniciarVitrina() {
   const panel = $(".vitrina-panel");
   const focos = $$(".foco");
-  if (reduceMovimiento) { focos.forEach((f) => f.classList.add("on")); return; }
+  if (reduceMovimiento) { focos.forEach((f) => f.style.setProperty("--luz", 1)); return; }
+  const n = focos.length;
   const actualizar = () => {
     const r = panel.getBoundingClientRect();
     // 0 cuando el panel asoma por abajo; 1 cuando ya está bien dentro de la pantalla
     const p = (innerHeight * 0.85 - r.top) / (r.height * 0.5 + innerHeight * 0.35);
-    focos.forEach((f, i) => f.classList.toggle("on", p > (i + 1) / (focos.length + 1)));
+    // Cada lámpara se enciende poco a poco en su tramo, una detrás de otra (los tramos se solapan un poco)
+    focos.forEach((f, i) => {
+      const inicio = i / (n + 1), tramo = 2 / (n + 1);
+      const luz = Math.min(1, Math.max(0, (p - inicio) / tramo));
+      f.style.setProperty("--luz", luz.toFixed(3));
+    });
   };
   addEventListener("scroll", () => requestAnimationFrame(actualizar), { passive: true });
   addEventListener("resize", actualizar);
