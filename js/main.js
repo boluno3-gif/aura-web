@@ -16,9 +16,6 @@ const CONFIG = {
 
 // fotos: n.º de fotos en assets/fotos/<carpeta>/ — la 1 es encendida y la 2 apagada
 const LAMPARAS = [
-  { id: "arbol-de-navidad", nombre: "Árbol de Navidad", precio: 34.9, medidas: "12 × 27,5 × 12 cm", etsy: "4615962377", carpeta: "arbol", fotos: 17, distintivo: "Navidad",
-    lema: "Un árbol en espiral con su estrella en la punta.",
-    descripcion: "Una lámpara con forma de árbol de Navidad en espiral, rematada con una estrella. Apagada decora como un adorno más, y encendida da una luz cálida y suave. Perfecta para el salón, la entrada o como regalo." },
   { id: "aurora", nombre: "Aurora", precio: 49.9, medidas: "17 × 18,8 × 17 cm", etsy: "4622716539", carpeta: "aurora", fotos: 12,
     lema: "La luz atraviesa las ondas y crea un brillo suave, como una aurora.",
     descripcion: "Una lámpara de mesa de formas orgánicas, recorrida por finas estrías que se ondulan de arriba abajo. Apagada parece una escultura, y encendida la luz atraviesa las ondas y crea un brillo suave y envolvente. Más grande que nuestras minis: queda bien en el salón, una consola o la mesita de noche." },
@@ -39,7 +36,6 @@ const LAMPARAS = [
     descripcion: "Una lámpara de mesa con forma de espiral trenzada. Apagada luce como una pieza de decoración, y encendida la trama reparte una luz cálida y suave. Queda bien en la mesita de noche, una estantería o el salón." },
 ];
 
-const DESTACADAS = ["aurora", "ola-doble"];
 
 const PREGUNTAS = [
   ["¿Cómo se enciende y se cambia el tono de luz?", "Con el mando que lleva el cable: la enciendes y la apagas, eliges luz cálida, neutra o fría y subes o bajas la intensidad."],
@@ -107,24 +103,31 @@ function pintarColeccion() {
     </article>`).join("");
 }
 
+/* ---------- abanico: franjas de las seis lámparas; la que señalas se ensancha ---------- */
 function pintarDestacadas() {
-  $("#destacadas").innerHTML = DESTACADAS.map((id) => {
-    const l = LAMPARAS.find((x) => x.id === id);
-    return `
-      <article class="grande aparece">
-        <img src="${foto(l, 1)}" alt="Lámpara ${l.nombre} encendida" loading="lazy" />
-        <div class="grande-texto">
-          <span class="etiqueta" style="position:static;align-self:flex-start">Hecha por encargo</span>
-          <h3>${l.nombre}</h3>
-          <p>${l.lema}</p>
-          <div class="grande-pie">
-            <span class="precio">${precioHTML(l)}</span>
-            <button data-abrir="${l.id}">Descubrir</button>
-            <a class="enlace-flecha enlace-claro" href="${enlaceEtsy(l)}" target="_blank" rel="noopener">Comprar <span aria-hidden="true">→</span></a>
-          </div>
+  $("#destacadas").innerHTML = LAMPARAS.map((l, i) => `
+    <article class="hoja${i === 0 ? " activa" : ""}" tabindex="0" aria-label="${l.nombre}">
+      <img src="${foto(l, 1)}" alt="Lámpara ${l.nombre} encendida" loading="lazy" />
+      <span class="hoja-nombre-corto" aria-hidden="true">${l.nombre}</span>
+      <div class="hoja-texto">
+        <p class="hoja-ante">Hecha por encargo · ${l.medidas}</p>
+        <h3>${l.nombre}</h3>
+        <p class="hoja-lema">${l.lema}</p>
+        <div class="hoja-pie">
+          <span class="precio">${precioHTML(l)}</span>
+          <button data-abrir="${l.id}">Descubrir</button>
+          <a class="enlace-flecha enlace-claro" href="${enlaceEtsy(l)}" target="_blank" rel="noopener">Comprar <span aria-hidden="true">→</span></a>
         </div>
-      </article>`;
-  }).join("");
+      </div>
+    </article>`).join("");
+
+  const hojas = $$("#destacadas .hoja");
+  const activar = (h) => hojas.forEach((x) => x.classList.toggle("activa", x === h));
+  hojas.forEach((h) => {
+    h.addEventListener("mouseenter", () => activar(h));
+    h.addEventListener("focusin", () => activar(h));
+    h.addEventListener("click", () => activar(h)); // en el móvil se abre al tocar
+  });
 }
 
 /* ---------- vitrina: se encienden una a una al bajar ---------- */
