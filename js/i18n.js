@@ -123,7 +123,7 @@ const TEXTOS = [
   ["30 días de devolución", "30-day returns"],
 
   // Pie
-  ["Pide un deseo. Enciéndelo.<br />Lámparas impresas en 3D en Málaga.", "Make a wish. Light it up.<br />3D-printed lamps in Málaga."],
+  ["Luz con forma, capa a capa.<br />Lámparas impresas en 3D en Málaga.", "Sculpted light, layer by layer.<br />3D-printed lamps in Málaga."],
   ["Explorar", "Explore"],
   ["Compras", "Shopping"],
   ["Málaga, España", "Málaga, Spain"],
