@@ -56,6 +56,9 @@ const hoyISO = () => new Date().toLocaleDateString("sv-SE");
 const ofertaActiva = () => CONFIG.oferta.desde <= hoyISO() && hoyISO() <= CONFIG.oferta.hasta;
 const precioOferta = (p) => Math.floor(Math.round(p * 100) * (100 - CONFIG.oferta.porcentaje) / 100) / 100;
 const foto = (l, n) => `assets/fotos/${l.carpeta}/${n}.jpg`;
+// fotos de estudio de la colección: assets/fotos/estudio/<nombre>-apagada.jpg y -encendida.jpg
+const ESTUDIO = { "aurora": "aurora", "lamas": "lamas", "ola-doble": "ola", "seda": "seda", "opalo-mini": "opalo", "marea-mini": "marea" };
+const fotoEstudio = (l, estado) => ESTUDIO[l.id] ? `assets/fotos/estudio/${ESTUDIO[l.id]}-${estado}.jpg` : foto(l, estado === "encendida" ? 1 : 2);
 const enlaceEtsy = (l) => `https://www.etsy.com/es/listing/${l.etsy}`;
 const fechaLarga = (iso) => new Date(`${iso}T12:00`).toLocaleDateString("es-ES", { day: "numeric", month: "long" });
 const reduceMovimiento = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -88,8 +91,8 @@ function pintarColeccion() {
       <button class="tarjeta-foto" data-abrir="${l.id}" aria-label="Ver ${l.nombre}">
         ${etiqueta}
         ${l.distintivo ? `<span class="etiqueta etiqueta-suave">${l.distintivo}</span>` : ""}
-        <img src="${foto(l, 2)}" alt="Lámpara ${l.nombre} apagada" loading="lazy" />
-        <img class="encendida" src="${foto(l, 1)}" alt="" aria-hidden="true" loading="lazy" />
+        <img src="${fotoEstudio(l, "apagada")}" alt="Lámpara ${l.nombre} apagada" loading="lazy" />
+        <img class="encendida" src="${fotoEstudio(l, "encendida")}" alt="" aria-hidden="true" loading="lazy" />
         <span class="interruptor">encender</span>
       </button>
       <div class="tarjeta-info">
