@@ -223,7 +223,7 @@ function abrirFicha(id) {
   $("#ficha-precio").innerHTML = precioHTML(l);
   $("#ficha-descripcion").textContent = l.descripcion;
   $("#ficha-medidas").textContent = l.medidas;
-  $("#ficha-entrega").textContent = t(`Gratis, te llega ${entregaEstimada()}`, `Free — arrives ${entregaEstimada()}`);
+  $("#ficha-entrega").textContent = t(`Gratis en España, te llega ${entregaEstimada()}`, `Free within Spain — arrives ${entregaEstimada()}`);
   $("#ficha-comprar").href = enlaceEtsy(l);
   $("#ficha-miniaturas").innerHTML = Array.from({ length: l.fotos }, (_, i) => `
     <button data-n="${i + 1}" aria-label="${t("Foto", "Photo")} ${i + 1}"><img src="${foto(l, i + 1)}" alt="" loading="lazy" /></button>`).join("");
