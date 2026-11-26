@@ -1,6 +1,6 @@
 RESUMEN DE LA WEB - AURA Design
 Lámparas de mesa impresas en 3D en Málaga
-Actualizado: 24/11/2026
+Actualizado: 26/11/2026
 ==============================================================
 
 QUÉ ES
@@ -19,26 +19,50 @@ cabecera. El navegador recuerda el idioma elegido. También se puede abrir
 directamente en inglés con index.html?lang=en
 
 
+DOS VERSIONES: ORDENADOR Y MÓVIL
+--------------------------------
+  - index.html + css/styles.css   -> versión de ordenador
+  - movil.html + css/movil.css    -> versión de móvil
+
+  Si se abre index.html en una pantalla estrecha (móvil), la página manda
+  sola a movil.html. Para ver la de ordenador en una pantalla estrecha se
+  añade ?ordenador al final de la dirección (index.html?ordenador).
+
+  Las dos comparten los datos, las traducciones y el comportamiento
+  (js/main.js y js/i18n.js). Así, un cambio de precio, foto o texto de una
+  lámpara sale en las dos. En cambio, los cambios de diseño se hacen en
+  cada versión por separado, y lo que se cambia en el móvil no afecta al
+  ordenador.
+
+  Para ver la versión móvil en el ordenador: abrir movil.html, pulsar F12
+  y luego Ctrl+Shift+M.
+
+
 ARCHIVOS
 --------
-  index.html        La página: textos (en español) y orden de las secciones.
-  css/styles.css    El aspecto: colores, tipografías, tamaños y animaciones.
-                    Los colores y fuentes de la marca están al principio.
+  index.html        Página de ordenador: textos (en español) y orden de las
+                    secciones.
+  movil.html        Página de móvil (mismo contenido, con sus diferencias).
+  css/styles.css    Aspecto de la versión de ordenador.
+  css/movil.css     Aspecto de la versión de móvil. Los retoques propios del
+                    móvil están al final del archivo.
   js/main.js        Los datos y el comportamiento: lámparas, precios,
-                    oferta, preguntas frecuentes y efectos al bajar.
+                    oferta, reseñas, preguntas frecuentes y efectos al bajar.
                     Lo editable está al principio del archivo.
   js/i18n.js        Las traducciones al inglés de los textos fijos.
   assets/fotos/     Fotos de la web:
      <lámpara>/       Fotos de la ficha de cada lámpara (ver más abajo).
      estudio/         Fotos de estudio de la colección (apagada y encendida).
      vitrina/         Fotos del panel "Destacadas".
-     abanico/         Fotos de las tiras alargadas.
-     anochecer/       Fotos de día y de noche de "De día a noche".
+     abanico/         Fotos de las tiras de las seis lámparas.
+     anochecer/       Fotos de "De día a noche": dia/noche (ordenador) y
+                      dia-movil/noche-movil (verticales, para el móvil).
      tonos/           Las tres fotos de "Elige tu luz" (cálida, neutra, fría).
      portada.jpg      Imagen de la portada.
   assets/video/     portada.mp4 (ahora mismo no se usa en la página).
   assets/favicon.svg  Icono de la pestaña del navegador.
   README.md         Explicación breve del proyecto.
+  RESUMEN-WEB.txt   Este resumen.
 
 
 IDENTIDAD VISUAL
@@ -71,6 +95,8 @@ LAS LÁMPARAS (6)
     1 apagada, 2 cálida, 3 neutra, 4 fría, 5 detalle, 6 con texto.
     Aurora tiene 5 (sin detalle: la 5 es la de texto).
   Las imágenes cuadradas (las de texto) se ven enteras, sin recortar.
+  Las infografías con texto ya dicen "AURA DESIGN" (sin Los3Deseos, "Mini"
+  ni "Pide un deseo").
 
 
 RECORRIDO DE LA PÁGINA (de arriba abajo)
@@ -82,19 +108,22 @@ RECORRIDO DE LA PÁGINA (de arriba abajo)
    el móvil, el menú se abre con un botón de hamburguesa.
 
 2. PORTADA
-   Foto de una mano acercándose a una lámpara encendida, a pantalla
-   completa. Texto alineado a la izquierda:
+   Foto de una mano acercándose a una lámpara encendida. Texto:
    - Antetítulo: "Hechas a mano en Málaga" (en ámbar)
    - Título: "Luz con forma para cada rincón"
    - Texto: "Lámparas de mesa fabricadas por encargo. Una a una, capa a
      capa / Con luz LED regulable en tres tonos"
    - Botones: "Ver la colección" y "mira cómo nace cada lámpara"
+   Móvil: la foto se ve más de lejos, con la lámpara abajo a la derecha, y
+   el texto debajo.
 
 3. DESTACADAS (panel oscuro)
-   Cinco fotos de estudio: Lamas, Ola, Seda, Ópalo y Marea. Al llegar
-   están oscuras y al bajar se van iluminando poco a poco, una tras otra.
-   Cada tarjeta lleva nombre, precio y botón "Comprar"; al pulsarla se abre
-   la ficha. 5 columnas en ordenador, 3 en tablet y 2 en móvil.
+   Fotos de estudio que al llegar están oscuras y, al bajar, se van
+   iluminando una tras otra. Cada tarjeta lleva nombre, precio y botón
+   "Comprar"; al pulsarla se abre la ficha.
+   - Ordenador: Lamas, Ola, Seda, Ópalo y Marea, en 5 columnas.
+   - Móvil: seis fotos (Aurora en tercera posición) en dos columnas
+     escalonadas, con alturas distintas.
 
 4. DE DÍA A NOCHE
    Escena a pantalla completa que se queda fija mientras se baja: la foto
@@ -103,7 +132,8 @@ RECORRIDO DE LA PÁGINA (de arriba abajo)
    - "De día a noche" (ámbar)
    - "Cuando cae la tarde…" cambia a "…tu casa se ilumina"
    - Enlace "Explora la colección"
-   El rótulo de la esquina cambia de "apagada" a "encendida".
+   Móvil: fotos verticales, más de lejos (se ven el jarrón, el cuenco y el
+   árbol), con la pared y la rama de olivo prolongadas hacia arriba.
 
 5. LA COLECCIÓN: "Seis esculturas que dan luz" (recuadro negro)
    Debajo: "Apagadas son esculturas. / Encendidas, la luz se cuela entre
@@ -112,54 +142,72 @@ RECORRIDO DE LA PÁGINA (de arriba abajo)
    pasar el ratón la lámpara se enciende; en el móvil se encienden solas al
    pasar por el centro. Precio y etiqueta "-20 %" en ámbar.
    Cada una tiene "Ver detalles" (ficha) y "Comprar" (Etsy).
-   Lamas y Marea salen un poco más cerca que las demás.
 
 6. NUESTRA HISTORIA: "Así nace un aura"
-   Bloque ancho y bajo con cuatro pestañas (cambian con un fundido suave):
+   Cuatro pestañas (cambian con un fundido suave):
      01 La idea: lámparas que también son esculturas.
      02 La impresión: capa a capa, en Málaga.
      03 Por encargo: se hace cuando la pides (con fecha de entrega).
      04 La luz: tres tonos y un mando.
-   Al lado, la cita: "La luz es el primer material con el que diseñamos."
+   - Ordenador: pestañas con forma de botón y, al lado, la cita "La luz es
+     el primer material con el que diseñamos."
+   - Móvil: pestañas en una sola fila, en mayúsculas y subrayadas en
+     terracota (LA IDEA · IMPRESIÓN · ENCARGO · LA LUZ), más pegadas al
+     título. Sin la tarjeta de la cita.
 
 7. ELIGE TU LUZ: "Una lámpara, tres ambientes" (fondo negro satinado)
    Botones Cálida (3000 K), Neutra (4000 K) y Fría (6400 K). Muestran la
    lámpara Lamas en cada tono; las tres fotos salen de la misma imagen, así
    que la forma es idéntica y solo cambia el color de la luz.
+   Móvil: la sección cabe entera en una pantalla, con los tres botones en
+   una fila (sin los grados K) y la foto ocupando el resto.
 
 8. EL TALLER: "Lámparas 3D, hechas en Málaga"
    Texto justificado sobre el PLA: plástico de origen vegetal (almidón de
    maíz o caña de azúcar), rígido, ligero y resistente, no tóxico y
    compostable en plantas industriales. Enlaces "Ver lámparas de mesa" y
-   "Escríbenos". Cuatro pasos con números grandes:
+   "Escríbenos". Cuatro pasos:
      01 Lo diseñamos  02 Lo imprimimos  03 Lo montamos  04 Te la enviamos
    El paso 04 calcula solo la fecha de entrega si se pide hoy.
    Debajo, centrado: "POR ENCARGO - Nada sale de la impresora hasta que
    alguien lo pide. / Así cada pieza se hace con calma y para una casa
    concreta, la tuya."
+   Móvil: los pasos son recuadros más bajos, con el número y el título en
+   la misma línea, y se agrandan un poco al poner el dedo encima.
 
-9. TIRAS DE LAS SEIS LÁMPARAS
-   Seis fotos alargadas en fila. La que se señala con el ratón se ensancha
-   y muestra nombre, precio y el botón "Descúbrela" (abre la ficha).
+9. LAS SEIS LÁMPARAS (tiras)
+   - Ordenador: seis fotos alargadas en fila. La que se señala con el ratón
+     se ensancha y muestra nombre, precio y "Descúbrela" (abre la ficha).
+   - Móvil: la sección se queda fija en la pantalla y, al ir bajando, se
+     abre la siguiente lámpara y se cierran las demás (Aurora, Lamas, Ola,
+     Seda, Ópalo, Marea). Al tocar una franja cerrada, baja hasta ella.
 
-10. PREGUNTAS FRECUENTES: "Todo lo que nos preguntáis" (recuadro negro)
+10. OPINIONES: "Lo que dicen nuestros clientes"
+    Reseñas de clientes en tarjetas, con estrellas, texto, nombre, lámpara
+    y fecha, y el enlace "Ver todas las reseñas en Etsy". Ahora mismo está
+    la de Karin (25/11/2026, 5 estrellas). En el móvil, más pequeñas.
+
+11. PREGUNTAS FRECUENTES: "Todo lo que nos preguntáis" (recuadro negro)
     Ocho preguntas desplegables: encendido y tonos, enchufe, calor, dejarla
     encendida de noche, fragilidad, limpieza, regalo y devoluciones.
 
-11. CIERRE: "¿Te llevas una a casa?" (fondo negro)
+12. CIERRE: "¿Te llevas una a casa?" (fondo negro)
     Botón "Comprar en Etsy", correo de contacto y cuatro garantías:
     Hecho en Málaga, Envío gratis en España, LED en 3 tonos y 30 días de
     devolución.
 
-12. PIE DE PÁGINA (fondo negro)
-    Logo y lema ("Luz con forma, capa a capa."), enlaces (Explorar, Compras, Contacto, Instagram
-    @los3deseos_) y año actualizado automáticamente.
+13. PIE DE PÁGINA (fondo negro)
+    Logo y lema ("Luz con forma, capa a capa."), enlaces (Explorar,
+    Compras, Contacto, Instagram @los3deseos_) y año automático.
 
 FICHA DE PRODUCTO (ventana emergente)
     Se abre al pulsar cualquier lámpara. Fotos con miniaturas, precio,
     descripción justificada, medidas, material (PLA), luz (LED regulable),
     cable (USB 5 V con adaptador), entrega ("Gratis en España, te llega
     entre el ... y el ...") y botón "Comprar en Etsy".
+    Las fotos se pasan deslizando con el dedo (o arrastrando con el ratón),
+    con las flechas grises a media altura de la foto o con las teclas ← →.
+    Después de la última vuelve a la primera.
 
 
 COSAS AUTOMÁTICAS
@@ -174,7 +222,7 @@ COSAS AUTOMÁTICAS
     fechas (1 December) y el enlace de Etsy.
   - ANIMACIONES: los bloques aparecen suavemente al bajar. Si alguien tiene
     activado "reducir movimiento", se muestran sin animación.
-  - Se adapta a ordenador, tablet y móvil.
+  - MÓVIL: los móviles van solos a movil.html.
 
 
 CÓMO CAMBIAR LO MÁS HABITUAL
@@ -184,12 +232,19 @@ CÓMO CAMBIAR LO MÁS HABITUAL
     (el campo "fotos" indica cuántas fotos tiene su carpeta).
   - Oferta (porcentaje, nombre y fechas): CONFIG -> oferta.
   - Plazos de fabricación y envío, festivos: CONFIG.
-  - Lámparas del panel "Destacadas": lista VITRINA.
+  - Lámparas del panel "Destacadas": lista VITRINA (Aurora solo sale en
+    el móvil).
+  - Reseñas: lista RESENAS. Para añadir una, se copia la de Karin y se
+    cambian nombre, fecha (año-mes-día), estrellas, lámpara y texto (en
+    español y en inglés).
   - Preguntas frecuentes: lista PREGUNTAS (en español y en inglés).
   En js/i18n.js:
   - Traducciones al inglés de los textos fijos: listas TEXTOS y ATRIBUTOS.
-    Si se cambia un texto en español en index.html, hay que cambiar
-    también aquí su versión en español, o dejará de traducirse.
+    Si se cambia un texto en español en index.html o movil.html, hay que
+    cambiar también aquí su versión en español, o dejará de traducirse.
+  Textos fijos de la página:
+  - Si un cambio debe salir en las dos versiones, hay que hacerlo en
+    index.html y también en movil.html.
 
 
 PENDIENTE O A REVISAR
@@ -202,3 +257,5 @@ PENDIENTE O A REVISAR
     no se muestra en la página.
   - El festivo más lejano de la lista es el 06/01/2027; habrá que añadir
     los del resto de 2027.
+  - Quedó a medias retocar las fotos de "Elige tu luz" con fondo neutro
+    (la lámpara parecía flotar).
