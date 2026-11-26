@@ -77,8 +77,8 @@
     <section class="anochecer" id="anochecer">
       <div class="anochecer-fijo">
         <div class="anochecer-fondo" aria-hidden="true">
-          <img src="assets/fotos/anochecer/dia.jpg" alt="" />
-          <img class="encendida" src="assets/fotos/anochecer/noche.jpg" alt="" />
+          <img src="assets/fotos/anochecer/dia-movil.jpg" alt="" />
+          <img class="encendida" src="assets/fotos/anochecer/noche-movil.jpg" alt="" />
         </div>
         <div class="anochecer-texto">
           <p class="antetitulo antetitulo-claro">De día a noche</p>
@@ -117,8 +117,8 @@
 
       <div class="pestanas aparece" role="tablist" aria-label="Nuestra historia">
         <button role="tab" aria-selected="true" aria-controls="p-idea" id="t-idea">La idea</button>
-        <button role="tab" aria-selected="false" aria-controls="p-impresion" id="t-impresion" tabindex="-1">La impresión</button>
-        <button role="tab" aria-selected="false" aria-controls="p-encargo" id="t-encargo" tabindex="-1">Por encargo</button>
+        <button role="tab" aria-selected="false" aria-controls="p-impresion" id="t-impresion" tabindex="-1">Impresión</button>
+        <button role="tab" aria-selected="false" aria-controls="p-encargo" id="t-encargo" tabindex="-1">Encargo</button>
         <button role="tab" aria-selected="false" aria-controls="p-material" id="t-material" tabindex="-1">La luz</button>
       </div>
 
@@ -161,14 +161,6 @@
             </div>
           </article>
         </div>
-        <blockquote class="cita">
-          <img src="assets/fotos/opalo/2.jpg" alt="" loading="lazy" />
-          <div>
-            <p>“La luz es el primer material con el que diseñamos.”</p>
-            <footer>— AURA Design</footer>
-            <a class="enlace-flecha enlace-claro" href="#taller">Cómo trabajamos <span aria-hidden="true">→</span></a>
-          </div>
-        </blockquote>
       </div>
     </section>
 
@@ -228,6 +220,18 @@
 
     <!-- Abanico de las seis lámparas -->
     <section class="abanico" id="destacadas" aria-label="Las seis lámparas"></section>
+
+    <!-- Opiniones de clientes (se rellenan desde la lista RESENAS de js/main.js) -->
+    <section class="ancho seccion opiniones" id="opiniones">
+      <div class="seccion-titulo aparece">
+        <div>
+          <p class="antetitulo">Opiniones</p>
+          <h2>Lo que dicen nuestros <em>clientes</em></h2>
+        </div>
+      </div>
+      <div class="opiniones-lista" id="opiniones-lista"></div>
+      <a class="enlace-flecha aparece" href="https://www.etsy.com/shop/Los3Deseos#reviews" target="_blank" rel="noopener">Ver todas las reseñas en Etsy <span aria-hidden="true">→</span></a>
+    </section>
 
     <!-- Preguntas (desde aquí hasta el final, fondo oscuro) -->
     <div class="preguntas-fondo">
@@ -296,7 +300,11 @@
   <dialog class="ficha" id="ficha" aria-labelledby="ficha-nombre">
     <button class="ficha-cerrar" id="ficha-cerrar" aria-label="Cerrar">×</button>
     <div class="ficha-galeria">
-      <img id="ficha-foto" src="" alt="" />
+      <div class="ficha-visor" id="ficha-visor">
+        <img id="ficha-foto" src="" alt="" />
+        <button class="ficha-flecha anterior" id="ficha-anterior" aria-label="Foto anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg></button>
+        <button class="ficha-flecha siguiente" id="ficha-siguiente" aria-label="Foto siguiente"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg></button>
+      </div>
       <div class="ficha-miniaturas" id="ficha-miniaturas"></div>
     </div>
     <div class="ficha-datos">

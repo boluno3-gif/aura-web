@@ -50,6 +50,15 @@ const LAMPARAS = [
 // En inglés, las medidas con punto decimal (18.8 en vez de 18,8)
 if (EN) LAMPARAS.forEach((l) => { l.medidas = l.medidas.replace(/(\d),(\d)/g, "$1.$2"); });
 
+// Reseñas de Etsy. Para añadir una, copia un bloque y cambia los datos.
+// fecha en formato año-mes-día; texto y lámpara en español y en inglés.
+const RESENAS = [
+  { nombre: "Karin", fecha: "2026-11-25", estrellas: 5,
+    lampara: t("Lámpara lunar personalizada", "Personalised moon lamp"),
+    texto: t("El artículo es exactamente como se describe, ¡simplemente excelente! 👌😊",
+             "The item is exactly as described, simply excellent! 👌😊") },
+];
+
 const PREGUNTAS = EN ? [
   ["How do I switch it on and change the light tone?", "With the remote on the cable: switch it on and off, choose warm, neutral or cool light and turn the brightness up or down."],
   ["Does it come with a plug?", "Yes. It has a 5 V USB cable and a plug adapter, so you can connect it to the wall or to any USB port, such as your computer's."],
@@ -130,7 +139,8 @@ function pintarColeccion() {
 
 /* ---------- abanico: franjas de las seis lámparas; la que señalas se ensancha ---------- */
 function pintarDestacadas() {
-  $("#destacadas").innerHTML = LAMPARAS.map((l, i) => `
+  const movil = document.documentElement.dataset.version === "movil";
+  $("#destacadas").innerHTML = (movil ? '<div class="abanico-fijo">' : "") + LAMPARAS.map((l, i) => `
     <article class="hoja${i === 0 ? " activa" : ""}" tabindex="0" aria-label="${l.nombre}">
       <img src="assets/fotos/abanico/${ESTUDIO[l.id]}.jpg" alt="${t(`Lámpara ${l.nombre} encendida`, `${l.nombre} lamp switched on`)}" loading="lazy" />
       <span class="hoja-nombre-corto" aria-hidden="true">${l.nombre}</span>
@@ -141,10 +151,30 @@ function pintarDestacadas() {
           <button data-abrir="${l.id}">${t("Descúbrela", "Discover")}</button>
         </div>
       </div>
-    </article>`).join("");
+    </article>`).join("") + (movil ? "</div>" : "");
 
   const hojas = $$("#destacadas .hoja");
   const activar = (h) => hojas.forEach((x) => x.classList.toggle("activa", x === h));
+
+  // Móvil: la sección se queda fija y, según bajas, se abre la siguiente lámpara y se cierran las demás
+  if (movil) {
+    const seccion = $("#destacadas");
+    const progreso = () => {
+      const r = seccion.getBoundingClientRect();
+      return Math.min(1, Math.max(0, -r.top / (r.height - innerHeight)));
+    };
+    const actualizar = () => activar(hojas[Math.min(hojas.length - 1, Math.floor(progreso() * hojas.length))]);
+    addEventListener("scroll", actualizar, { passive: true });
+    addEventListener("resize", actualizar);
+    actualizar();
+    // al tocar una franja, baja hasta el punto en que esa lámpara está abierta
+    hojas.forEach((h, i) => h.addEventListener("click", () => {
+      if (h.classList.contains("activa")) return;
+      const recorrido = seccion.offsetHeight - innerHeight;
+      scrollTo({ top: seccion.getBoundingClientRect().top + scrollY + recorrido * (i + 0.5) / hojas.length, behavior: "smooth" });
+    }));
+    return;
+  }
   hojas.forEach((h) => {
     h.addEventListener("mouseenter", () => activar(h));
     h.addEventListener("focusin", () => activar(h));
@@ -157,6 +187,7 @@ function pintarDestacadas() {
 const VITRINA = [
   ["lamas", "lamas.jpg"],
   ["ola-doble", "ola-doble.jpg"],
+  ...(document.documentElement.dataset.version === "movil" ? [["aurora", "aurora.jpg"]] : []), // solo en el móvil
   ["seda", "seda.jpg"],
   ["opalo-mini", "opalo.jpg"],
   ["marea-mini", "marea.jpg"],
@@ -199,6 +230,20 @@ function iniciarVitrina() {
   actualizar();
 }
 
+function pintarOpiniones() {
+  const fecha = (iso) => new Date(`${iso}T12:00`).toLocaleDateString(t("es-ES", "en-GB"), { day: "numeric", month: "long", year: "numeric" });
+  $("#opiniones-lista").innerHTML = RESENAS.map((r) => `
+    <figure class="opinion aparece">
+      <div class="opinion-estrellas" role="img" aria-label="${t(`${r.estrellas} de 5 estrellas`, `${r.estrellas} out of 5 stars`)}">${"★".repeat(r.estrellas)}${"☆".repeat(5 - r.estrellas)}</div>
+      <blockquote>“${r.texto}”</blockquote>
+      <figcaption>
+        <strong>${r.nombre}</strong>
+        <span>${r.lampara} · ${fecha(r.fecha)}</span>
+        <span class="opinion-origen">${t("Reseña de Etsy", "Etsy review")}</span>
+      </figcaption>
+    </figure>`).join("");
+}
+
 function pintarPreguntas() {
   $("#acordeon").innerHTML = PREGUNTAS.map(([p, r], i) => `
     <details class="aparece">
@@ -215,7 +260,9 @@ function abrirFicha(id) {
   const principal = $("#ficha-foto");
   // si la foto no es vertical, se muestra entera en vez de recortada
   principal.onload = () => principal.classList.toggle("entera", principal.naturalWidth / principal.naturalHeight > 0.9);
+  let actual = 1;
   const ponerFoto = (n) => {
+    actual = Number(n);
     principal.src = foto(l, n);
     principal.alt = t(`Lámpara ${l.nombre}, foto ${n}`, `${l.nombre} lamp, photo ${n}`);
     $$("#ficha-miniaturas button").forEach((b) => b.setAttribute("aria-current", b.dataset.n == n));
@@ -230,6 +277,8 @@ function abrirFicha(id) {
   $("#ficha-miniaturas").innerHTML = Array.from({ length: l.fotos }, (_, i) => `
     <button data-n="${i + 1}" aria-label="${t("Foto", "Photo")} ${i + 1}"><img src="${foto(l, i + 1)}" alt="" loading="lazy" /></button>`).join("");
   $$("#ficha-miniaturas button").forEach((b) => b.addEventListener("click", () => ponerFoto(b.dataset.n)));
+  // flechas y deslizar: pasan a la foto anterior o siguiente (da la vuelta al final)
+  ficha.paso = (d) => ponerFoto(((actual - 1 + d + l.fotos) % l.fotos) + 1);
   ponerFoto(1);
   ficha.showModal();
   ficha.scrollTop = 0;
@@ -243,6 +292,25 @@ function iniciarFicha() {
   const ficha = $("#ficha");
   $("#ficha-cerrar").addEventListener("click", () => ficha.close());
   ficha.addEventListener("click", (e) => { if (e.target === ficha) ficha.close(); });
+
+  // galería: flechas, deslizar con el dedo (o arrastrar con el ratón) y teclas ← →
+  $("#ficha-anterior").addEventListener("click", () => ficha.paso(-1));
+  $("#ficha-siguiente").addEventListener("click", () => ficha.paso(1));
+  ficha.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") ficha.paso(-1);
+    if (e.key === "ArrowRight") ficha.paso(1);
+  });
+  const visor = $("#ficha-visor");
+  let x0 = null, y0 = 0;
+  visor.addEventListener("pointerdown", (e) => { if (!e.target.closest("button")) { x0 = e.clientX; y0 = e.clientY; } });
+  visor.addEventListener("pointerup", (e) => {
+    if (x0 === null) return;
+    const dx = e.clientX - x0, dy = e.clientY - y0;
+    x0 = null;
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) ficha.paso(dx < 0 ? 1 : -1);
+  });
+  visor.addEventListener("pointercancel", () => { x0 = null; });
+  $("#ficha-foto").addEventListener("dragstart", (e) => e.preventDefault());
 }
 
 /* ---------- cabecera y menú ---------- */
@@ -344,6 +412,7 @@ function iniciarApariciones() {
 pintarColeccion();
 pintarVitrina();
 pintarDestacadas();
+pintarOpiniones();
 pintarPreguntas();
 iniciarFicha();
 iniciarCabecera();
@@ -355,3 +424,6 @@ iniciarApariciones();
 $("#entrega").textContent = entregaEstimada();
 $("#pie-entrega").textContent = t(`Si la pides hoy, llega ${entregaEstimada()}`, `Order today and it will arrive ${entregaEstimada()}`);
 $("#anio").textContent = new Date().getFullYear();
+
+// En iPhone, :active (el efecto al poner el dedo) solo funciona si hay un oyente de toque
+document.addEventListener("touchstart", () => {}, { passive: true });

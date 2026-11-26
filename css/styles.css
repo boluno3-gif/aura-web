@@ -503,6 +503,17 @@ h1 em, h2 em, h3 em {
 .acordeon details[open] summary::after { transform: rotate(45deg); }
 .acordeon .respuesta { padding: 0 42px 28px 72px; color: var(--apagado); max-width: 52em; }
 
+/* Opiniones de clientes */
+#opiniones { padding-block: clamp(56px, 7vw, 96px); }
+.opiniones-lista { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 520px)); gap: 20px; }
+.opinion { margin: 0; background: var(--papel); border-radius: 24px; padding: clamp(26px, 3vw, 40px); display: flex; flex-direction: column; gap: 18px; }
+.opinion-estrellas { color: var(--terracota); font-size: 20px; letter-spacing: .18em; line-height: 1; }
+.opinion blockquote { margin: 0; font-family: var(--display); font-size: clamp(22px, 2.2vw, 28px); line-height: 1.28; letter-spacing: -.005em; color: var(--oscuro); }
+.opinion figcaption { display: flex; flex-direction: column; gap: 4px; font-size: 14px; color: var(--apagado); }
+.opinion figcaption strong { color: var(--oscuro); font-size: 15px; }
+.opinion-origen { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--terracota); }
+#opiniones > .enlace-flecha { align-self: flex-start; }
+
 /* Preguntas sobre fondo oscuro, igual que el cierre y el pie */
 .preguntas-fondo {
   background: #000; color: var(--crema);
@@ -548,9 +559,24 @@ h1 em, h2 em, h3 em {
 .ficha::backdrop { background: rgba(26,18,12,.6); backdrop-filter: blur(4px); }
 .ficha-cerrar { position: absolute; top: 14px; right: 14px; z-index: 3; width: 44px; height: 44px; border-radius: 50%; border: 0; background: var(--crema); font-size: 26px; line-height: 1; cursor: pointer; color: var(--oscuro); }
 .ficha-galeria { background: var(--crema-2); display: flex; flex-direction: column; min-width: 0; }
-.ficha-galeria > img { width: 100%; aspect-ratio: 4 / 5; max-height: calc(100dvh - 140px); object-fit: cover; }
+.ficha-visor > img { width: 100%; aspect-ratio: 4 / 5; max-height: calc(100dvh - 140px); object-fit: cover; }
 /* Imágenes cuadradas o apaisadas (como las infografías): se ven enteras, sin recortar */
-.ficha-galeria > img.entera { object-fit: contain; background: #1c1612; }
+.ficha-visor > img.entera { object-fit: contain; background: #1c1612; }
+/* Visor de la ficha: se desliza y tiene flechas grises a media altura */
+.ficha-visor { position: relative; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+.ficha-visor > img { display: block; }
+.ficha-flecha {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 40px; height: 40px; border-radius: 50%; border: 0; padding: 0; cursor: pointer;
+  display: grid; place-items: center;
+  background: rgba(60, 60, 60, .45); color: #fff;
+  -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+  transition: background .2s;
+}
+.ficha-flecha:hover { background: rgba(60, 60, 60, .7); }
+.ficha-flecha.anterior { left: 12px; }
+.ficha-flecha.siguiente { right: 12px; }
+.ficha-flecha svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
 .ficha-miniaturas { display: flex; gap: 8px; padding: 12px; overflow-x: auto; scrollbar-width: thin; }
 .ficha-miniaturas button { flex: 0 0 64px; height: 80px; padding: 0; border: 2px solid transparent; border-radius: 10px; overflow: hidden; cursor: pointer; background: none; opacity: .6; transition: opacity .2s, border-color .2s; }
 .ficha-miniaturas button[aria-current="true"] { border-color: var(--terracota); opacity: 1; }
@@ -608,7 +634,7 @@ h1 em, h2 em, h3 em {
   .taller { row-gap: 24px; }
   .taller-ante { margin-bottom: -6px; }
   .ficha[open] { grid-template-columns: minmax(0, 1fr); }
-  .ficha-galeria > img { max-height: 60dvh; }
+  .ficha-visor > img { max-height: 60dvh; }
 }
 @media (max-width: 560px) {
   .pasos, .pie-rejilla { grid-template-columns: 1fr; }

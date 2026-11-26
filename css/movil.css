@@ -307,6 +307,7 @@ h1 em, h2 em, h3 em {
   .foco:nth-child(3) { grid-column: 1; grid-row: 31 / span 24; }
   .foco:nth-child(4) { grid-column: 2; grid-row: 30 / span 31; }  /* alta */
   .foco:nth-child(5) { grid-column: 1; grid-row: 55 / span 27; }
+  .foco:nth-child(6) { grid-column: 2; grid-row: 61 / span 22; }
   .foco-info { gap: 8px; }
   .foco-comprar { font-size: 10px; padding: 6px 12px; }
 }
@@ -349,6 +350,7 @@ h1 em, h2 em, h3 em {
 }
 #coleccion { padding-top: clamp(40px, 5vw, 64px); padding-bottom: clamp(40px, 5vw, 64px); }
 #historia { padding-top: clamp(16px, 2vw, 24px); padding-bottom: clamp(32px, 4vw, 56px); }
+#historia .pestanas { margin-top: -18px; }   /* menos hueco entre el título y las pestañas */
 .historia-paneles { display: flex; }
 .historia-paneles .panel { flex: 1; }
 .seccion-sub { margin-top: 20px; color: var(--apagado); }
@@ -371,14 +373,17 @@ h1 em, h2 em, h3 em {
 .coleccion-fondo .tarjeta-foto { box-shadow: 0 18px 40px rgba(0, 0, 0, .45); }
 
 /* Historia */
-.pestanas { display: flex; flex-wrap: wrap; gap: 8px; border-bottom: 1px solid var(--linea); padding-bottom: 18px; }
+/* Pestañas en una sola fila, en mayúsculas y subrayadas (la elegida, en terracota) */
+.pestanas { display: flex; flex-wrap: nowrap; gap: 0; border-bottom: 1px solid var(--linea); padding-bottom: 0; }
 .pestanas button {
-  font: inherit; font-weight: 700; font-size: 15px; cursor: pointer;
-  background: none; border: 1px solid var(--linea); color: var(--apagado);
-  padding: 10px 20px; border-radius: 999px; transition: all .3s var(--ease);
+  flex: 1 1 0; min-width: 0;
+  font: inherit; font-weight: 500; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; line-height: 1.5;
+  cursor: pointer; background: none; border: 0; border-radius: 0; color: var(--apagado);
+  padding: 14px 4px; margin-bottom: -1px;
+  border-bottom: 3px solid transparent; transition: color .3s var(--ease), border-color .3s var(--ease);
 }
-.pestanas button:hover { border-color: var(--oscuro); color: var(--oscuro); }
-.pestanas button[aria-selected="true"] { background: var(--oscuro); border-color: var(--oscuro); color: var(--crema); }
+.pestanas button:hover { color: var(--oscuro); }
+.pestanas button[aria-selected="true"] { color: var(--oscuro); border-bottom-color: var(--terracota); }
 .historia { display: grid; grid-template-columns: 1.6fr 1fr; gap: 24px; }
 .panel { display: grid; grid-template-columns: 1fr 1fr; background: var(--papel); border-radius: 24px; overflow: hidden; min-height: 520px; animation: entra .6s var(--ease); }
 .panel[hidden] { display: none; }
@@ -503,11 +508,16 @@ h1 em, h2 em, h3 em {
 .hoja .precio s { color: rgba(243,236,226,.6); }
 .hoja-pie button { font: inherit; font-weight: 700; font-size: 15px; background: none; border: 0; border-bottom: 1px solid currentColor; color: inherit; padding: 0 0 2px; cursor: pointer; }
 /* Móvil: las franjas pasan a ser horizontales, una encima de otra */
+/* Al bajar, la sección se queda fija y las lámparas se van abriendo una tras otra (en vertical) */
 @media (max-width: 760px) {
-  .abanico { flex-direction: column; height: auto; min-height: 0; }
-  .hoja { flex: none; height: 76px; transition: height .7s var(--ease); }
+  .abanico { display: block; height: calc(100svh + 6 * 55svh); min-height: 0; overflow: visible; }
+  .abanico-fijo {
+    position: sticky; top: 0; height: 100svh; overflow: hidden;
+    display: flex; flex-direction: column; padding-top: 84px; box-sizing: border-box; background: var(--noche);
+  }
+  .hoja { flex: 1 1 0; min-height: 0; }
   .hoja + .hoja { border-left: 0; border-top: 1px solid rgba(0,0,0,.35); }
-  .hoja.activa { height: 72vh; }
+  .hoja.activa { flex-grow: 7; }
   .hoja-nombre-corto { writing-mode: horizontal-tb; transform: none; left: 20px; bottom: auto; top: 50%; translate: 0 -50%; }
 }
 
@@ -523,6 +533,17 @@ h1 em, h2 em, h3 em {
 .acordeon summary::after { content: "+"; font-family: var(--texto); font-size: 26px; font-weight: 400; justify-self: end; transition: transform .35s var(--ease); }
 .acordeon details[open] summary::after { transform: rotate(45deg); }
 .acordeon .respuesta { padding: 0 42px 28px 72px; color: var(--apagado); max-width: 52em; }
+
+/* Opiniones de clientes */
+#opiniones { padding-block: clamp(56px, 7vw, 96px); }
+.opiniones-lista { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 520px)); gap: 20px; }
+.opinion { margin: 0; background: var(--papel); border-radius: 24px; padding: clamp(26px, 3vw, 40px); display: flex; flex-direction: column; gap: 18px; }
+.opinion-estrellas { color: var(--terracota); font-size: 20px; letter-spacing: .18em; line-height: 1; }
+.opinion blockquote { margin: 0; font-family: var(--display); font-size: clamp(22px, 2.2vw, 28px); line-height: 1.28; letter-spacing: -.005em; color: var(--oscuro); }
+.opinion figcaption { display: flex; flex-direction: column; gap: 4px; font-size: 14px; color: var(--apagado); }
+.opinion figcaption strong { color: var(--oscuro); font-size: 15px; }
+.opinion-origen { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--terracota); }
+#opiniones > .enlace-flecha { align-self: flex-start; }
 
 /* Preguntas sobre fondo oscuro, igual que el cierre y el pie */
 .preguntas-fondo {
@@ -569,9 +590,24 @@ h1 em, h2 em, h3 em {
 .ficha::backdrop { background: rgba(26,18,12,.6); backdrop-filter: blur(4px); }
 .ficha-cerrar { position: absolute; top: 14px; right: 14px; z-index: 3; width: 44px; height: 44px; border-radius: 50%; border: 0; background: var(--crema); font-size: 26px; line-height: 1; cursor: pointer; color: var(--oscuro); }
 .ficha-galeria { background: var(--crema-2); display: flex; flex-direction: column; min-width: 0; }
-.ficha-galeria > img { width: 100%; aspect-ratio: 4 / 5; max-height: calc(100dvh - 140px); object-fit: cover; }
+.ficha-visor > img { width: 100%; aspect-ratio: 4 / 5; max-height: calc(100dvh - 140px); object-fit: cover; }
 /* Imágenes cuadradas o apaisadas (como las infografías): se ven enteras, sin recortar */
-.ficha-galeria > img.entera { object-fit: contain; background: #1c1612; }
+.ficha-visor > img.entera { object-fit: contain; background: #1c1612; }
+/* Visor de la ficha: se desliza y tiene flechas grises a media altura */
+.ficha-visor { position: relative; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+.ficha-visor > img { display: block; }
+.ficha-flecha {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 40px; height: 40px; border-radius: 50%; border: 0; padding: 0; cursor: pointer;
+  display: grid; place-items: center;
+  background: rgba(60, 60, 60, .45); color: #fff;
+  -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+  transition: background .2s;
+}
+.ficha-flecha:hover { background: rgba(60, 60, 60, .7); }
+.ficha-flecha.anterior { left: 12px; }
+.ficha-flecha.siguiente { right: 12px; }
+.ficha-flecha svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
 .ficha-miniaturas { display: flex; gap: 8px; padding: 12px; overflow-x: auto; scrollbar-width: thin; }
 .ficha-miniaturas button { flex: 0 0 64px; height: 80px; padding: 0; border: 2px solid transparent; border-radius: 10px; overflow: hidden; cursor: pointer; background: none; opacity: .6; transition: opacity .2s, border-color .2s; }
 .ficha-miniaturas button[aria-current="true"] { border-color: var(--terracota); opacity: 1; }
@@ -619,6 +655,8 @@ h1 em, h2 em, h3 em {
   /* Móvil: la lámpara se centra en la foto y el texto va abajo, sobre un velo */
   .anochecer-fijo { align-items: flex-end; padding: 0 max(20px, 4vw) 80px; }
   .anochecer-fondo img { object-position: 50% center; }
+  /* Foto vertical (con la pared prolongada arriba): se ve entera y nítida, apoyada abajo */
+  .anochecer-fondo img { object-position: 50% 100%; }
   .anochecer-fondo::after {
     background: linear-gradient(0deg, rgba(14,10,7,.8) 0%, rgba(14,10,7,.4) 30%, transparent 48%);
   }
@@ -629,7 +667,7 @@ h1 em, h2 em, h3 em {
   .taller { row-gap: 24px; }
   .taller-ante { margin-bottom: -6px; }
   .ficha[open] { grid-template-columns: minmax(0, 1fr); }
-  .ficha-galeria > img { max-height: 60dvh; }
+  .ficha-visor > img { max-height: 60dvh; }
 }
 @media (max-width: 560px) {
   .pasos, .pie-rejilla { grid-template-columns: 1fr; }
@@ -647,4 +685,41 @@ h1 em, h2 em, h3 em {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
   .aparece { opacity: 1; transform: none; }
+}
+
+/* Móvil: "Elige tu luz" entera en una sola pantalla (texto, botones y foto) */
+@media (max-width: 760px) {
+  .tonos { height: 100svh; min-height: 620px; padding-block: 92px 24px; display: flex; box-sizing: border-box; }
+  .tonos-fila { display: flex; flex-direction: column; align-items: stretch; gap: 18px; flex: 1; min-height: 0; width: 100%; }
+  .tonos-texto > p:not(.antetitulo) { margin: 12px 0 16px; font-size: 15px; }
+  .tonos-botones { flex-wrap: nowrap; gap: 8px; margin-bottom: 0; }
+  .tonos-botones button { flex: 1 1 0; justify-content: center; font-size: 14px; gap: 8px; padding: 10px 8px; }
+  .tonos-botones small { display: none; }
+  .tonos-foto { flex: 1; min-height: 0; aspect-ratio: auto; width: 100%; align-self: stretch; }
+}
+
+/* Móvil: pasos del taller más compactos, con el título al lado del número */
+@media (max-width: 760px) {
+  .pasos { gap: 10px; }
+  .pasos li { display: grid; grid-template-columns: auto 1fr; align-items: baseline; column-gap: 14px; row-gap: 6px; min-height: 0; padding: 18px 20px; }
+  .pasos li h3 { margin-top: 0; }
+  .pasos li p { grid-column: 1 / -1; }
+}
+
+/* Móvil: al poner el dedo encima de un paso, se agranda un poco */
+@media (max-width: 760px) {
+  .pasos li { -webkit-tap-highlight-color: transparent; }
+  .pasos li:hover { transform: none; box-shadow: none; }
+  .pasos li:active { transform: scale(1.04); box-shadow: var(--sombra); transition-duration: .2s; }
+}
+
+/* Móvil: reseñas más pequeñas */
+@media (max-width: 760px) {
+  #opiniones { padding-block: 44px; gap: 22px; }
+  .opinion { padding: 20px 22px; gap: 12px; border-radius: 18px; }
+  .opinion-estrellas { font-size: 15px; }
+  .opinion blockquote { font-size: 18px; }
+  .opinion figcaption { font-size: 13px; gap: 2px; }
+  .opinion figcaption strong { font-size: 14px; }
+  .opinion-origen { font-size: 10px; }
 }

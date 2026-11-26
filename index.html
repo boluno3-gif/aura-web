@@ -234,6 +234,18 @@
     <!-- Abanico de las seis lámparas -->
     <section class="abanico" id="destacadas" aria-label="Las seis lámparas"></section>
 
+    <!-- Opiniones de clientes (se rellenan desde la lista RESENAS de js/main.js) -->
+    <section class="ancho seccion opiniones" id="opiniones">
+      <div class="seccion-titulo aparece">
+        <div>
+          <p class="antetitulo">Opiniones</p>
+          <h2>Lo que dicen nuestros <em>clientes</em></h2>
+        </div>
+      </div>
+      <div class="opiniones-lista" id="opiniones-lista"></div>
+      <a class="enlace-flecha aparece" href="https://www.etsy.com/shop/Los3Deseos#reviews" target="_blank" rel="noopener">Ver todas las reseñas en Etsy <span aria-hidden="true">→</span></a>
+    </section>
+
     <!-- Preguntas (desde aquí hasta el final, fondo oscuro) -->
     <div class="preguntas-fondo">
     <section class="ancho seccion preguntas" id="preguntas">
@@ -301,7 +313,11 @@
   <dialog class="ficha" id="ficha" aria-labelledby="ficha-nombre">
     <button class="ficha-cerrar" id="ficha-cerrar" aria-label="Cerrar">×</button>
     <div class="ficha-galeria">
-      <img id="ficha-foto" src="" alt="" />
+      <div class="ficha-visor" id="ficha-visor">
+        <img id="ficha-foto" src="" alt="" />
+        <button class="ficha-flecha anterior" id="ficha-anterior" aria-label="Foto anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg></button>
+        <button class="ficha-flecha siguiente" id="ficha-siguiente" aria-label="Foto siguiente"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg></button>
+      </div>
       <div class="ficha-miniaturas" id="ficha-miniaturas"></div>
     </div>
     <div class="ficha-datos">

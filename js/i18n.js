@@ -56,6 +56,8 @@ const TEXTOS = [
   ["La idea", "The idea"],
   ["La impresión", "The making"],
   ["Por encargo", "Made to order"],
+  ["Impresión", "Printing"],
+  ["Encargo", "Made to order"],
   ["La luz", "The light"],
   ["Una lámpara que también es <em>escultura</em>", "A lamp that is also a <em>sculpture</em>"],
   ["Queríamos piezas que tuvieran sentido de día, cuando están apagadas, y que de noche cambiaran por completo. Por eso cada diseño juega con lamas, estrías y espirales que la luz atraviesa.",
@@ -104,6 +106,11 @@ const TEXTOS = [
    'Free shipping within Spain in 2 to 4 days. Order today and it will arrive <strong id="entrega">in a few days</strong>.'],
   ["Nada sale de la impresora hasta que alguien lo pide.<br />Así cada pieza se hace con calma y para una casa concreta, la tuya.",
    "Nothing leaves the printer until someone orders it.<br />That way, each piece is made slowly and carefully, for one home in particular: yours."],
+
+  // Opiniones
+  ["Opiniones", "Reviews"],
+  ["Lo que dicen nuestros <em>clientes</em>", "What our <em>customers</em> say"],
+  [`Ver todas las reseñas en Etsy ${FLECHA}`, `Read all reviews on Etsy ${FLECHA}`],
 
   // Preguntas
   ["Preguntas frecuentes", "Frequently asked questions"],
@@ -156,6 +163,8 @@ const ATRIBUTOS = [
   ["Lámpara Lamas encendida", "Lamas lamp switched on"],
   ["Las seis lámparas", "The six lamps"],
   ["Cerrar", "Close"],
+  ["Foto anterior", "Previous photo"],
+  ["Foto siguiente", "Next photo"],
 ];
 
 function traducirPagina() {
